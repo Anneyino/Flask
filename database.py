@@ -35,6 +35,12 @@ def signup(username, password, email):
         return False
     return True
 
+
+def get_user(username):
+    sql_str = "SELECT * FROM user WHERE username=%s;"
+    user = fetchOneres(sql_str, (username,))
+    return user
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露

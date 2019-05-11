@@ -9,11 +9,6 @@ def get_username_from_database(uid):
     username = found_session[0] if found_session else None
     return username
 
-def get_uid_from_database(username):
-    found_session = database.fetchOneres("SELECT uid FROM user WHERE username='{}';".format(username))
-    uid = found_session[0] if found_session else None
-    return uid    
-
 def check_login(username, password):
     correct_pwd = database.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
     return correct_pwd and correct_pwd[0] == password  
