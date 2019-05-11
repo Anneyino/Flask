@@ -58,3 +58,5 @@ CREATE TABLE session(
     PRIMARY KEY(session_id),
     FOREIGN KEY(uid) REFERENCES user(uid)
 );
+
+INSERT INTO subject VALUES(1, '英语', 90, 'Resources/english');

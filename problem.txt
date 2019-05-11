@@ -1,2 +1,6 @@
-1. password hash
-2. data inconsistent
+1. data inconsistent
+
+
+security vulnerbilities
+1. server should store the hash of password instead of password itself
+2. session should expired after a period of time and be removed from database
