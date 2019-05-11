@@ -68,11 +68,16 @@ def insert_init_user_helper(uid):
 
 def insert_init_user_subject(uid):
     sql_str = "INSERT INTO user_subject VALUES(%s, %s, %s);"
-    # 1 is engligh
+    # 1 is english
     executeSQL(sql_str, (uid, 1, 0))
 
-def get_helper(uid):
 
+def get_helper(hid):
+    sql_str = "SELECT * FROM helper WHERE hid=%s;"
+    helper = fetchOneres(sql_str, (hid,))
+    if not helper:
+        return None
+    return helper
 
 # values = fetchAllres("select * from user")
 # cursor.close() 

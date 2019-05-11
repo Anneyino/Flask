@@ -49,7 +49,11 @@ def home():
     user = database.get_user_by_session_id(session_id)
     if not user:
         return render_template("sign.html", error='please login')
-    return render_template("home.html", user_id=user[0])
+    current_hid = user[4]
+    helper = database.get_helper(current_hid)
+    model_id = helper[1]
+    costume_id = helper[2]
+    return render_template("home.html", mode=model_id, cos=costume_id)
 
 
 # unrefactored
