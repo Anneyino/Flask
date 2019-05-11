@@ -112,12 +112,12 @@ def get_progress(uid, sid):
     return progress[0]
 
 
-def get_chapter_no(sid):
-    sql_str = "SELECT chapter_no FROM subject WHERE sid=%s;"
-    chapter_no = fetchOneres(sql_str, (sid,))
-    if not chapter_no:
+def get_subject(sid):
+    sql_str = "SELECT * FROM subject WHERE sid=%s;"
+    subject = fetchOneres(sql_str, (sid,))
+    if not subject:
         return None
-    return chapter_no[0]
+    return subject
 
 # values = fetchAllres("select * from user")
 # cursor.close() 

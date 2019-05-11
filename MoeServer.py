@@ -4,6 +4,8 @@ import json
 import database
 import helper
 import user_auth
+import os
+import csv
 
 app = Flask(__name__)
 
@@ -174,9 +176,39 @@ def Forsendtest():
         return {'code': 'no user'}
 
     sid = request.form['subjectID']
-    chapter_no = database.get_chapter_no(sid)
+    subject = database.get_subject(sid)
+    chapter_no = subject[2]
     data = {'code': 'ok', "data": chapter_no}
     return json.dump(data)
+
+
+@app.route('/learn', methods=['POST'])
+def friendlist():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+
+    sid = request.form['subjectID']
+    chapter = request.form['chapter']
+    subject = database.get_subject(sid)
+
+    if chapter < 0 or chapter > subject[2] - 1:
+        return {'code': 'illegal parameter'}
+
+    stored_path = subject[3]
+    filename = "table" + str(chapter) + ".csv"
+    path = os.path.join(stored_path, filename)
+
+    words = {}
+    with open(path) as csvfile:
+        spamreader = csv.reader(csvfile)
+        for idx, row in enumerate(spamreader, 1):
+            words[idx] = {"word": row[0]}
+            words[idx] = {"chinese": row[1]}
+    ret_data = {"code": "ok", "data": words}
+    return json.dumps(ret_data)
 
 # unrefactored
 
