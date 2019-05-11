@@ -1,3 +1,9 @@
+modification
+1. /signup is now POST only
+2. /login is now POST only
+2. /getAllFriends is now GET only
+
+
 1. data inconsistent
 2. no logout button
 

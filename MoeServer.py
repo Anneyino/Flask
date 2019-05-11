@@ -45,10 +45,12 @@ def signup():
 
 @app.route('/home', methods=['GET'])
 def home():
+    # check login status
     session_id = request.cookies.get('SESSION_ID', '')
     user = database.get_user_by_session_id(session_id)
     if not user:
         return render_template("sign.html", error='please login')
+
     current_hid = user[4]
     helper = database.get_helper(current_hid)
     model_id = helper[1]
@@ -73,6 +75,26 @@ def login():
     resp = redirect(url_for('home'))
     resp.set_cookie('SESSION_ID', session_id)
     return resp
+
+
+@app.route('/getAllFriends', methods=['GET'])
+def get_all_friends():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+
+    uid = user[0]
+    friends_id = database.get_all_friends(uid)
+    data = {'code': 'ok'}
+    friends_name = {}
+    for idx, friend_id in enumerate(friends_id):
+        friend = database.get_user_by_uid(friend_id)
+        friend_name = friend[1]
+        friends_name[idx] = friend_name
+    data['data'] = friends_name
+    return json.dumps(data)
 
 
 # unrefactored

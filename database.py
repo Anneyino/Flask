@@ -90,6 +90,13 @@ def get_password(username):
     if not passwd:
         return None
     return passwd[0]
+
+
+def get_all_friends(uid):
+    sql_str = "SELECT uid_secondary FROM friend WHERE uid_primary=%s;"
+    friends = fetchAllres(sql_str, (uid,))
+    return friends
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露
