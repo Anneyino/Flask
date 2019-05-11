@@ -1,7 +1,7 @@
 from flask import *
 import time
 import json
-import dbtest, user_auth
+import database, user_auth
 
 app = Flask(__name__)
 

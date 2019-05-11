@@ -1,26 +1,26 @@
 from functools import wraps
-import dbtest
+import database
 from flask import *
 
 
 def get_username_from_database(uid):
-    found_session = dbtest.fetchOneres("SELECT username FROM user WHERE uid='{}';".format(uid))
+    found_session = database.fetchOneres("SELECT username FROM user WHERE uid='{}';".format(uid))
     username = found_session[0] if found_session else None
     return username
 
 def get_uid_from_database(username):
-    found_session = dbtest.fetchOneres("SELECT uid FROM user WHERE username='{}';".format(username))
+    found_session = database.fetchOneres("SELECT uid FROM user WHERE username='{}';".format(username))
     uid = found_session[0] if found_session else None
     return uid    
 
 def check_login(username, password):
-    correct_pwd = dbtest.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
+    correct_pwd = database.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
     return correct_pwd and correct_pwd[0] == password  
 
 def verify_sign(username, password, email):
     result = True
     try:
-        dbtest.executeSQL("INSERT INTO user(username, passwd, email) values('{}', '{}', '{}');".format(username, password, email))
+        database.executeSQL("INSERT INTO user(username, passwd, email) values('{}', '{}', '{}');".format(username, password, email))
     except:
         result = False
     return result
@@ -28,7 +28,7 @@ def verify_sign(username, password, email):
 def show_friends(uid_primary):
     result = True
     try:
-        all_friends = dbtest.fetchAllres("SELECT uid_secondary FROM friend WHERE uid_primary ='{}';".format(uid_primary))
+        all_friends = database.fetchAllres("SELECT uid_secondary FROM friend WHERE uid_primary ='{}';".format(uid_primary))
     except:
         result = False
     return all_friends    
