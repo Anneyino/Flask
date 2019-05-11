@@ -97,6 +97,17 @@ def get_all_friends():
     return json.dumps(data)
 
 
+@app.route('/GoForFriend', methods=['POST'])
+def GoForFriend():
+    fid = request.form['uid']
+    user = database.get_user_by_uid(fid)
+    current_hid = user[4]
+    helper = database.get_helper(current_hid)
+    model_id = helper[1]
+    costume_id = helper[2]
+    return render_template("home.html", mode=model_id, cos=costume_id)
+
+
 # unrefactored
 
 @app.route('/Fortest', methods=['GET', 'POST'])
@@ -125,18 +136,6 @@ def Forsendtest():
         friends_list_json[count]['name'] = fn
         count = count + 1
     return json.dumps(friends_list_json)
-
-
-@app.route('/GoForFriend', methods=['POST'])
-def GoForFriend():
-    # data = request.get_data(as_text=True)
-    # datas = json.loads(data)
-    # selected_friendname = datas['friend_name']
-    fid = request.form['uid']
-    # friend_id = user_auth.get_uid_from_database(selected_friendname)
-    # FriendInfo = {}
-    # FriendInfo['fid'] = friend_id
-    return render_template("home.html")
 
 
 @app.route('/friend', methods=['GET', 'POST'])
