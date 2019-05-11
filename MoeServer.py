@@ -210,31 +210,20 @@ def friendlist():
     ret_data = {"code": "ok", "data": words}
     return json.dumps(ret_data)
 
-# unrefactored
 
-# @app.route('/Fortest', methods=['GET', 'POST'])
-# def Fortest():
-#     testInfo = {}
-#     for i in range(5):
-#         testInfo[i] = {}
-#         testInfo[i]['day'] = '928'
-#     return json.dumps(testInfo)
+@app.route('/recordSchedule', methods=['POST'])
+def friendlist():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
 
+    uid = user[0]
+    sid = request.form['subjectID']
+    chapter = request.form['chapter']
 
-# @app.route('/ForSendtest', methods=['POST'])
-# def Forsendtest():
-#     data = request.get_data(as_text=True)
-#     datas = json.loads(data)
-#     current_userid = datas['current_uid']
-#     intid = int(current_userid)
-#     all_friends_id = user_auth.show_friends(intid)
-#     all_friends_name = []
-#     for eachid in all_friends_id:
-#         all_friends_name.append(user_auth.get_username_from_database(eachid[0]))
-#     friends_list_json = {}
-#     count = 0
-#     for fn in all_friends_name:
-#         friends_list_json[count] = {}
-#         friends_list_json[count]['name'] = fn
-#         count = count + 1
-#     return json.dumps(friends_list_json)
+    database.update_progress(uid, sid, chapter)
+
+    resp = redirect(url_for('home'))
+    return resp

@@ -119,6 +119,11 @@ def get_subject(sid):
         return None
     return subject
 
+
+def update_progress(uid, sid, progress):
+    sql_str = "UPDATE user_subject SET progress=%s WHERE uid=%s AND sid=%s;"
+    executeSQL(sql_str, (progress, uid, sid))
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露
