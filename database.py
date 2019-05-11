@@ -60,6 +60,17 @@ def insert_session(session_id, uid):
     sql_str = "INSERT INTO session(session_id, uid) VALUES(%s, %s);"
     executeSQL(sql_str, (session_id, uid))
 
+
+def insert_init_user_helper(uid):
+    sql_str = "INSERT INTO user_helper VALUES(%s, %s, %s);"
+    executeSQL(sql_str, (uid, 1, 0))
+
+
+def insert_init_user_subject(uid):
+    sql_str = "INSERT INTO user_subject VALUES(%s, %s, %s);"
+    # 1 is engligh
+    executeSQL(sql_str, (uid, 1, 0))
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露

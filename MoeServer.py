@@ -32,7 +32,11 @@ def signup():
     # create session_id
     session_id = helper.generate_session_id()
     user = database.get_user_by_name(username)
-    database.insert_session(session_id, user[0])
+    uid = user[0]
+    database.insert_session(session_id, uid)
+
+    # init user data
+    helper.user_init(uid)
 
     resp = redirect(url_for('home'))
     resp.set_cookie('SESSION_ID', session_id)
