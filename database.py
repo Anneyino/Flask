@@ -36,9 +36,15 @@ def signup(username, password, email):
     return True
 
 
-def get_user(username):
+def get_user_by_name(username):
     sql_str = "SELECT * FROM user WHERE username=%s;"
     user = fetchOneres(sql_str, (username,))
+    return user
+
+
+def get_user_by_uid(uid):
+    sql_str = "SELECT * FROM user WHERE uid=%s;"
+    user = fetchOneres(sql_str, (uid,))
     return user
 
 
@@ -46,11 +52,12 @@ def insert_session(session_id, uid):
     sql_str = "INSERT INTO session(session_id, uid) VALUES(%s, %s);"
     executeSQL(sql_str, (session_id, uid))
 
-# def get_username_from_session(session_id):
-#     session = request.cookies.get('SESSION_ID', '')
-#     found_session = database.fetchone("SELECT username FROM sessions WHERE id='{}';".format(session))
-#     username = found_session[0] if found_session else None
-#     return username
+
+def get_username_from_session(session_id):
+    session = request.cookies.get('SESSION_ID', '')
+    found_session = database.fetchone("SELECT username FROM sessions WHERE id='{}';".format(session))
+    username = found_session[0] if found_session else None
+    return username
 
 # values = fetchAllres("select * from user")
 # cursor.close() 

@@ -31,7 +31,7 @@ def signup():
 
     # create session_id
     session_id = helper.generate_session_id()
-    user = database.get_user(username)
+    user = database.get_user_by_name(username)
     database.insert_session(session_id, user[0])
 
     resp = redirect(url_for('home'))
