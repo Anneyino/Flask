@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MoeLearn(￣▽￣)~【】</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="../static/css/styleM.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/reset.css"/>
+</head>
+<body>
+
+<div id="particles-js">
+		<div class="login">
+			<div class="login-top-cen"> </div>
+                        <form action = "/login" method = "POST">
+			<div class="login-center clearfix">
+				<div class="login-center-img"><img src="../static/img/name.png"/></div>
+				<div class="login-center-input">
+					<input type="text" name="username" id="username" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+					<div class="login-center-input-text">用户名</div>
+				</div>
+			</div>
+			<div class="login-center clearfix">
+				<div class="login-center-img"><img src="../static/img/password.png"/></div>
+				<div class="login-center-input">
+					<input type="password" name="password" id="password" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+					<div class="login-center-input-text">密码</div>
+				</div>
+			</div>
+			<div onclick="loginClick()">
+				<button type="submit" class="login-button" style="width:200px;height:30px;">登录</button>
+			</div>
+			<br></br>
+                        </form>
+			<div align="center">
+				<a href="javascript:" class="txt2" onclick="signClick()">立即注册</a>
+			</div>
+		</div>
+		<div class="sk-rotating-plane"></div>
+</div>
+
+
+<!-- scripts -->
+<script src="../static/js/particles.min.js"></script>
+<script src="../static/js/app.js"></script>
+<script type="text/javascript">
+	function createSign() {
+		//删除原有login的元素
+		var child=document.getElementsByClassName("login");
+		var parent=child[0].parentNode;
+		parent.removeChild(child[0]);
+
+		var signPage='<div class="login">'+
+		'<div class="login-top-cen"> </div>' +
+                '<form action = "/sign" method = "POST">' +
+		'<div class="login-center clearfix">' +
+		'<div class="login-center-img"><img src="../static/img/name.png"/></div>' +
+		'<div class="login-center-input">' +
+		'<input type="text" name="username" id="name" value="" placeholder="请输入您的用户名" onblur="loseFocusName()" onfocus="this.placeholder=\'\'"/>' +
+		'<div class="login-center-input-text">用户名</div>' +
+		'</div>' +
+		'</div>' +
+		'<div class="login-center clearfix">' +
+		'<div class="login-center-img"><img src="../static/img/password.png"/></div>' + 
+		'<div class="login-center-input">' +
+		'<input type="password" name="password" id="password" value="" placeholder="请输入您的密码" onblur="loseFocusPass()" onfocus="this.placeholder=\'\'"/>' +
+		'<div class="login-center-input-text">密码</div>' +
+		'</div>' +
+		'</div>' +
+		'<div class="login-center clearfix">' +
+		'<div class="login-center-img"><img src="../static/img/email.png"/></div>' + 
+		'<div class="login-center-input">' +
+		'<input type="text" name="emailaddr" id="email" value="" placeholder="请输入您的邮箱" onblur="loseFocusEmail()" onfocus="this.placeholder=\'\'"/>' + 
+		'<div class="login-center-input-text">邮箱</div>' +
+		'</div>' +
+		'</div>' +
+		'<div class="sign-button" onclick="signPush()"><button type="submit" class="button is-success" style="width:200px;height:30px;">注册</button></div>' +
+                '</form>' +
+		'<div class="sk-rotating-plane"></div>' +
+		'</div>' 
+		parent.innerHTML = signPage;
+	}	
+	function hasClass(elem, cls) {
+	  cls = cls || '';
+	  if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+	  return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
+	}
+	 
+	function addClass(ele, cls) {
+	  if (!hasClass(ele, cls)) {
+	    ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
+	  }
+	}
+	 
+	function removeClass(ele, cls) {
+	  if (hasClass(ele, cls)) {
+	    var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
+	    while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+	      newClass = newClass.replace(' ' + cls + ' ', ' ');
+	    }
+	    ele.className = newClass.replace(/^\s+|\s+$/g, '');
+	  }
+	}
+
+	function loseFocusName(){
+		var theName=document.getElementById("name");
+		var name = /^[a-zA-Z0-9_-]{0,16}$/;
+		if(theName.value == ""){
+			theName.placeholder="用户名不能为空";
+			return;
+		}
+		if(theName.value.length > 16){
+			theName.value="";
+			theName.placeholder="用户名最长为16位";
+			return;
+		}
+		if(!name.test(theName.value)){
+			theName.value="";
+			theName.placeholder="用户名不能包含特殊字符";
+			return;
+		}
+	}
+
+	function loseFocusPass(){
+		var thePassword=document.getElementById("password");
+		var password = /^[a-zA-Z0-9_-]{8,16}$/;
+		if(thePassword.value.length== ""){
+			thePassword.placeholder="密码不能为空";
+			return;
+		}
+		if(thePassword.value.length < 8){
+			thePassword.value="";
+			thePassword.placeholder="密码最短为8位";
+			return;
+		}
+		if(thePassword.value.length > 16){
+			thePassword.value="";
+			thePassword.placeholder="密码最长为16位";
+			return;
+		}
+		if(!password.test(thePassword.value)){
+			thePassword.value="";
+			thePassword.placeholder="密码不能包含特殊字符";
+			return;
+		}
+	}
+
+	function loseFocusEmail(){
+		var theEmail=document.getElementById("email");
+		var email = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}$/;
+		if(theEmail.value== ""){
+			theEmail.placeholder="邮箱不能为空";
+			return;
+		}
+		if(!email.test(theEmail.value)){
+			theEmail.value="";
+			theEmail.placeholder="邮箱格式错误";
+			return;
+		}
+	}
+	function loginClick(){
+		var login=document.getElementsByClassName("login")[0];
+		var plane=document.getElementsByClassName("sk-rotating-plane")[0];
+		addClass(login,"active");
+		setTimeout(function(){
+			addClass(plane, "active");
+			login.style.display = "none"
+		},500)
+		setTimeout(function(){
+			removeClass(login, "active");
+			removeClass(plane, "active");
+			login.style.display = "block";
+		},1500)
+	}
+
+	function signClick(){
+		var login=document.getElementsByClassName("login")[0];
+		var plane=document.getElementsByClassName("sk-rotating-plane")[0];
+		addClass(login,"active");
+		setTimeout(function(){
+			addClass(plane, "active");
+			login.style.display = "none";
+		},500)
+		setTimeout(function(){
+			removeClass(login, "active");
+			removeClass(plane, "active");
+			login.style.display = "block";
+			createSign();
+		},1500)
+	}
+
+	function signPush(){
+		var login=document.getElementsByClassName("login")[0];
+		var plane=document.getElementsByClassName("sk-rotating-plane")[0];
+		addClass(login,"active");
+		setTimeout(function(){
+			addClass(plane, "active");
+			login.style.display = "none";
+		},500)
+		setTimeout(function(){
+			removeClass(login, "active");
+			removeClass(plane, "active");
+			login.style.display = "block";
+			},1500)
+	}
+		
+
+</script>
+</body>
+</html>

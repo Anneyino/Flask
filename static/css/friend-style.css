@@ -1,0 +1,148 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+ font-size:16px;
+ background-color: #f3f3f3;
+}
+.header{
+  
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  height: 45px;
+  background: #21a4f4;
+  
+  
+}
+.header p{
+ margin-left:20px;
+ height: 45px;
+ line-height: 45px;
+ color: #fff;
+ font-size: 18px;
+ display:inline-block;
+}
+.header span{
+ color:#fff;
+ margin-right: 20px;
+ float: right;
+ line-height: 45px;
+}
+.content{
+ margin-top:45px;
+}
+.nav{
+  background-color: #fff;
+}
+
+.header-two{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  height: 45px;
+  background: #21a4f4; 
+}
+.header-two p{
+ margin-left:20px;
+ height: 45px;
+ line-height: 45px;
+ color: #fff;
+ font-size: 18px;
+ display:inline-block;
+}
+.header-two span{
+ color:#fff;
+ margin-left:6px;
+ line-height: 45px;
+}
+.header-two i{
+ color:#fff;
+ margin-left: 20px;
+ line-height: 45px;
+}
+.header-two input{
+ border:none;
+ 
+ width:80%;
+ background-color:transparent;
+}
+.sort_box-two{
+ display:block;
+}
+.input{
+ border-bottom: 2px #fff solid;
+ display: inline-block;
+ height: 42px;
+ width: calc(100% - 50px);
+}
+ul li{list-style: none;}
+a{text-decoration: none;cursor: pointer;}
+html{height: 100%;}
+a,input,img,textarea,span,div{outline: 0;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+
+#letter{
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  font-size: 24px;
+  color: #555;
+  text-align: center;
+  line-height: 100px;
+  background: rgba(145,145,145,0.6);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin:-50px 0px 0px -50px;
+  z-index: 99;
+  display: none;
+}
+#letter img{
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin:25px 0px 0px 25px;
+}
+[class^="sort_box"]{
+  width: 100%;
+  padding-top: 45px;
+  overflow: hidden;
+  
+}
+[class^="sort_list"]{
+  padding:10px 60px 10px 30px;
+  position: relative;
+  line-height: 25px;
+  border-bottom:1px solid #ddd;
+}
+
+[class^="sort_list"] .num_logo{
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  left: 20px;
+}
+[class^="sort_list"] .num_logo img{
+  width: 50px;
+  height: 50px;
+}
+[class^="sort_list"] .num_name{
+  color: #000;
+}
+
+.sort_letter{
+  height: 30px;
+  line-height: 30px;
+  padding-left: 20px;
+  color:#787878;
+  font-size: 14px;
+  border-bottom:1px solid #ddd;
+}

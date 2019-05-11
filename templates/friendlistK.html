@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+  <TITLE>好友</TITLE>
+  <meta charset="UTF-8">
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" type="text/css" href="../static/css/friend-style.css"/>
+  <!-- Fonts -->
+  <link
+  href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400'
+  rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900'
+  rel='stylesheet' type='text/css'>
+  <!-- CSS Libs -->
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap-switch.min.css">
+
+  <script src="../static/js/jquery.1.9.1.min.js"></script>
+  <script type="text/javascript" src="../static/js/jquery.charfirst.pinyin.js"></script>
+  <script type="text/javascript" src="../static/js/circlel.js"></script>
+
+</HEAD>
+
+<BODY>
+ <div class="header-two">
+  <div>
+    <i class="glyphicon glyphicon-chevron-left" onclick="back()"><a href="javascript:back()"></a> </i>
+    <div class="input">
+      <span class="glyphicon glyphicon-search"></span> 
+      <input id="search" type="text" />
+    </div>
+  </div>
+</div>
+<div id="uid" style="display:none;">{{uid}}</div>
+<div class="header">
+  <div>
+    <p>好友列表</p>
+    <span id="gosearch" class="glyphicon glyphicon-search"></span>
+  </div>
+</div>
+<div id="letter" ></div>
+<div class="sort_box-two">
+  
+</div>
+<div id = "friendslist" style="display:none;">
+  {{Friends}}
+</div>
+<div id = "uids" style="display:none;">
+  {{uid}}
+</div>
+
+<form>
+<div>
+<
+</div>
+<form>
+<div class="sort_box"></div>
+<script type="text/javascript">
+  function printContent(){
+  
+  var allNames = new Array("bbb");
+  var box=document.getElementsByClassName("sort_box");
+  var idnode = document.getElementById("uids").innerText;
+  var data = { "current_uid" : idnode };
+  senddata = JSON.stringify(data);
+   $.ajax({
+       async: false,
+       url: "/ForSendtest",
+       type: "POST",
+       data: senddata,
+       dataType: "json",
+       success: function (data) {
+           var index = 0;
+           for(var d in data){
+            var htmlstr = '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
+			'<div class = "num_name">' + data[index].name + '</div>' 
+			'<input type="text" id="uid" name="uid" value ="abc" style="display:none;"/>' +
+			'</form>';
+            var div0 = document.createElement("div");
+            div0.innerHTML = htmlstr;
+            div0.className = "sort_list";
+            $(".sort_box")[0].appendChild(div0);
+            index = index+1;      
+        }   
+       }
+   })  
+  
+  }
+
+  printContent();
+</script>
+</BODY>
+</HTML>
+

@@ -1,0 +1,64 @@
+
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+  box-sizing: border-box;
+  font-weight: 300;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-wrapper-for-study {
+  position: fixed;
+  top: 3%;
+  left: 40%;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-wrapper-for-sports {
+  position: fixed;
+  top: 15%;
+  left: 40%;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-wrapper-for-friends {
+  position: fixed;
+  top: 27%;
+  left: 40%;
+  width: 100%;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  box-shadow: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0;
+  outline: 0;
+  background-color: #FFA500;
+  height: 45px;
+  line-height: 42px;
+  padding: 0 30px;
+  font-size: 25px;
+  border-radius: 30px;
+  color: #282d32;
+  cursor: pointer;
+  transition: all .5s;
+  transition-timing-function: cubic-bezier(0.2, 3, 0.4, 1);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.btn:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+}
+.btn:active {
+  -webkit-transform: scale(1.05, 1.05);
+          transform: scale(1.05, 1.05);
+}
