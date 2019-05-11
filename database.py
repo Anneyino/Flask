@@ -48,16 +48,17 @@ def get_user_by_uid(uid):
     return user
 
 
+def get_user_by_session_id(session_id):
+    sql_str = "SELECT uid FROM session WHERE session_id=%s;"
+    uid = fetchOneres(sql_str, (session_id,))
+    if not uid:
+        return None
+    return get_user_by_uid(uid)
+
+
 def insert_session(session_id, uid):
     sql_str = "INSERT INTO session(session_id, uid) VALUES(%s, %s);"
     executeSQL(sql_str, (session_id, uid))
-
-
-def get_username_from_session(session_id):
-    session = request.cookies.get('SESSION_ID', '')
-    found_session = database.fetchone("SELECT username FROM sessions WHERE id='{}';".format(session))
-    username = found_session[0] if found_session else None
-    return username
 
 # values = fetchAllres("select * from user")
 # cursor.close() 

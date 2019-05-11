@@ -4,28 +4,29 @@ from flask import *
 import sys
 
 
-def get_username():
-
 def check_login(username, password):
     correct_pwd = database.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
-    return correct_pwd and correct_pwd[0] == password  
-
+    return correct_pwd and correct_pwd[0] == password
 
 
 def show_friends(uid_primary):
     result = True
     try:
-        all_friends = database.fetchAllres("SELECT uid_secondary FROM friend WHERE uid_primary ='{}';".format(uid_primary))
+        all_friends = database.fetchAllres(
+            "SELECT uid_secondary FROM friend WHERE uid_primary ='{}';".format(uid_primary))
     except:
         result = False
-    return all_friends    
+    return all_friends
+
 
 POSSIBLE_SERVER_NAMES = [
     'https://moelearn.com/'
 ]
 
+
 def is_valid_referer(referer):
     return any(referer.startswith(name) for name in POSSIBLE_SERVER_NAMES)
+
 
 def csrf_protect(f):
     @wraps(f)
@@ -35,4 +36,5 @@ def csrf_protect(f):
             print('Potential CSRF blocked', file=sys.stderr)
             return 'Potential CSRF blocked', 403
         return f(*args, **kwargs)
+
     return decorated_function

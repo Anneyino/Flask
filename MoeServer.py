@@ -41,8 +41,11 @@ def signup():
 
 @app.route('/home', methods=['GET'])
 def home():
-    username =
-    return render_template("home.html", user_id=current_uid)
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+    return render_template("home.html", user_id=user[0])
 
 
 # unrefactored
