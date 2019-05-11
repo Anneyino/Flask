@@ -71,6 +71,9 @@ def insert_init_user_subject(uid):
     # 1 is engligh
     executeSQL(sql_str, (uid, 1, 0))
 
+def get_helper(uid):
+
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露

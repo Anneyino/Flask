@@ -9,7 +9,9 @@ CREATE TABLE user(
     username VARCHAR(50) unique NOT NULL,
     passwd VARCHAR(50) NOT NULL, -- for security concern, this field should be the hash(i.e. SHA256) of actual password
     email VARCHAR(50),
-    PRIMARY KEY(uid)
+    current_hid INT,
+    PRIMARY KEY(uid),
+    FOREIGN KEY(current_hid) REFERENCES helper(hid)
 )charset=utf8;
 
 CREATE TABLE friend(
