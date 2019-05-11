@@ -9,28 +9,28 @@ conn = pymysql.connect(host='148.70.247.3',  # 远程主机的ip地址，
 cursor = conn.cursor()  # 创建一个光标，然后通过光标执行sql语句
 
 
-def executeSQL(sql, *parameters):
+def executeSQL(sql, parameters):
     with conn:
-        cursor.execute(sql, *parameters)
+        cursor.execute(sql, parameters)
         conn.commit()
 
 
-def fetchAllres(sql, *parameters):
+def fetchAllres(sql, parameters):
     with conn:
-        cursor.execute(sql, *parameters)
+        cursor.execute(sql, parameters)
         return cursor.fetchall()
 
 
-def fetchOneres(sql, *parameters):
+def fetchOneres(sql, parameters):
     with conn:
-        cursor.execute(sql, *parameters)
+        cursor.execute(sql, parameters)
         return cursor.fetchone()
 
 
 def signup(username, password, email):
     sql_str = "INSERT INTO user(username, passwd, email) values(%s, %s, %s);"
     try:
-        executeSQL(sql_str, username, password, email)
+        executeSQL(sql_str, (username, password, email))
     except:
         return False
     return True
