@@ -1,0 +1,2 @@
+1. password hash
+2. data inconsistent

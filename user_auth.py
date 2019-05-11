@@ -18,13 +18,7 @@ def check_login(username, password):
     correct_pwd = database.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
     return correct_pwd and correct_pwd[0] == password  
 
-def verify_sign(username, password, email):
-    result = True
-    try:
-        database.executeSQL("INSERT INTO user(username, passwd, email) values('{}', '{}', '{}');".format(username, password, email))
-    except:
-        result = False
-    return result
+
 
 def show_friends(uid_primary):
     result = True

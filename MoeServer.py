@@ -13,7 +13,7 @@ def send_static(path):
 def index():
     return render_template('sign.html')
 
-@app.route('/sign', methods=['GET', 'POST'])
+@app.route('/sign', methods=['POST'])
 def sign():
     username = request.form['username']
     password = request.form['password']
