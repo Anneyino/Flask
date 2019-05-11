@@ -41,6 +41,17 @@ def get_user(username):
     user = fetchOneres(sql_str, (username,))
     return user
 
+
+def insert_session(session_id, uid):
+    sql_str = "INSERT INTO session(session_id, uid) VALUES(%s, %s);"
+    executeSQL(sql_str, (session_id, uid))
+
+# def get_username_from_session(session_id):
+#     session = request.cookies.get('SESSION_ID', '')
+#     found_session = database.fetchone("SELECT username FROM sessions WHERE id='{}';".format(session))
+#     username = found_session[0] if found_session else None
+#     return username
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露

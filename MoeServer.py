@@ -23,13 +23,25 @@ def signup():
     username = request.form['username']
     password = request.form['password']
     email = request.form['emailaddr']
+
+    # try to signup
     success = database.signup(username, password, email)
     if not success:
         return render_template("sign.html", error='username exists')
-    current_uid = user_auth.get_uid_from_database(username)
-    user = database.get_user(username)
-    uid = user[0]
+
+    # create session_id
     session_id = helper.generate_session_id()
+    user = database.get_user(username)
+    database.insert_session(session_id, user[0])
+
+    resp = redirect(url_for('home'))
+    resp.set_cookie('SESSION_ID', session_id)
+    return resp
+
+
+@app.route('/home', methods=['GET'])
+def home():
+    username =
     return render_template("home.html", user_id=current_uid)
 
 
@@ -85,11 +97,6 @@ def GoForFriend():
     # friend_id = user_auth.get_uid_from_database(selected_friendname)
     # FriendInfo = {}
     # FriendInfo['fid'] = friend_id
-    return render_template("home.html")
-
-
-@app.route('/home', methods=['GET', 'POST'])
-def home():
     return render_template("home.html")
 
 

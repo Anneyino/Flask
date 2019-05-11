@@ -4,10 +4,7 @@ from flask import *
 import sys
 
 
-def get_username_from_database(uid):
-    found_session = database.fetchOneres("SELECT username FROM user WHERE uid='{}';".format(uid))
-    username = found_session[0] if found_session else None
-    return username
+def get_username():
 
 def check_login(username, password):
     correct_pwd = database.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
