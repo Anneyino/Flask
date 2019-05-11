@@ -39,12 +39,16 @@ def signup(username, password, email):
 def get_user_by_name(username):
     sql_str = "SELECT * FROM user WHERE username=%s;"
     user = fetchOneres(sql_str, (username,))
+    if not user:
+        return None
     return user
 
 
 def get_user_by_uid(uid):
     sql_str = "SELECT * FROM user WHERE uid=%s;"
     user = fetchOneres(sql_str, (uid,))
+    if not user:
+        return None
     return user
 
 
@@ -79,6 +83,13 @@ def get_helper(hid):
         return None
     return helper
 
+
+def get_password(username):
+    sql_str = "SELECT passwd FROM user WHERE username=%s;"
+    passwd = fetchOneres(sql_str, (username,))
+    if not passwd:
+        return None
+    return passwd[0]
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露

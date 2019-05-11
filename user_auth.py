@@ -4,11 +4,6 @@ from flask import *
 import sys
 
 
-def check_login(username, password):
-    correct_pwd = database.fetchOneres("SELECT passwd FROM user WHERE username='{}';".format(username))
-    return correct_pwd and correct_pwd[0] == password
-
-
 def show_friends(uid_primary):
     result = True
     try:

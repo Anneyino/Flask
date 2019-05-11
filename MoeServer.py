@@ -58,12 +58,11 @@ def home():
 
 # unrefactored
 
-
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
-    success = user_auth.check_login(username, password)
+    success = helper.check_login(username, password)
     if not success:
         return render_template("sign.html", error='wrong username and password')
     time.sleep(3)
