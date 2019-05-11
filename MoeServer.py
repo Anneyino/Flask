@@ -97,8 +97,14 @@ def get_all_friends():
     return json.dumps(data)
 
 
-@app.route('/GoForFriend', methods=['POST'])
+@app.route('/GoForFriend', methods=['GET'])
 def GoForFriend():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+
     fid = request.form['uid']
     user = database.get_user_by_uid(fid)
     current_hid = user[4]
@@ -106,6 +112,24 @@ def GoForFriend():
     model_id = helper[1]
     costume_id = helper[2]
     return render_template("home.html", mode=model_id, cos=costume_id)
+
+
+@app.route('/friend', methods=['GET'])
+def friendlist():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+
+    uid = user[0]
+    friends_id = database.get_all_friends(uid)
+    friends_name = []
+    for friend_id in friends_id:
+        friend = database.get_user_by_uid(friend_id)
+        friend_name = friend[1]
+        friends_name.append(friend_name)
+    return render_template("friendlistK.html", uid=uid, Friends=friends_name)
 
 
 # unrefactored
@@ -136,13 +160,3 @@ def Forsendtest():
         friends_list_json[count]['name'] = fn
         count = count + 1
     return json.dumps(friends_list_json)
-
-
-@app.route('/friend', methods=['GET', 'POST'])
-def friendlist():
-    userid = request.form['uid']
-    all_friends_id = user_auth.show_friends(userid)
-    all_friends_name = []
-    for eachid in all_friends_id:
-        all_friends_name.append(user_auth.get_username_from_database(eachid[0]))
-    return render_template("friendlistK.html", uid=userid, Friends=all_friends_name)

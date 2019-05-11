@@ -3,17 +3,6 @@ import database
 from flask import *
 import sys
 
-
-def show_friends(uid_primary):
-    result = True
-    try:
-        all_friends = database.fetchAllres(
-            "SELECT uid_secondary FROM friend WHERE uid_primary ='{}';".format(uid_primary))
-    except:
-        result = False
-    return all_friends
-
-
 POSSIBLE_SERVER_NAMES = [
     'https://moelearn.com/'
 ]
