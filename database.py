@@ -103,6 +103,22 @@ def search_user(keyword):
     users = fetchAllres(sql_str, (keyword,))
     return users
 
+
+def get_progress(uid, sid):
+    sql_str = "SELECT progress FROM user_subject WHERE uid=%s AND sid=%s;"
+    progress = fetchOneres(sql_str, (uid, sid))
+    if not progress:
+        return None
+    return progress[0]
+
+
+def get_chapter_no(sid):
+    sql_str = "SELECT chapter_no FROM subject WHERE sid=%s;"
+    chapter_no = fetchOneres(sql_str, (sid,))
+    if not chapter_no:
+        return None
+    return chapter_no[0]
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露

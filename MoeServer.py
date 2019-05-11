@@ -151,31 +151,58 @@ def Forsendtest():
     return json.dump(data)
 
 
+@app.route('/GoTolearn', methods=['POST'])
+def GoForFriend():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+
+    uid = user[0]
+    sid = request.form['subjectID']
+    progress = database.get_progress(uid, sid)
+    return render_template('learn.html', chapter=progress)
+
+
+@app.route('/Totalchapter', methods=['POST'])
+def Forsendtest():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+
+    sid = request.form['subjectID']
+    chapter_no = database.get_chapter_no(sid)
+    data = {'code': 'ok', "data": chapter_no}
+    return json.dump(data)
+
 # unrefactored
 
-@app.route('/Fortest', methods=['GET', 'POST'])
-def Fortest():
-    testInfo = {}
-    for i in range(5):
-        testInfo[i] = {}
-        testInfo[i]['day'] = '928'
-    return json.dumps(testInfo)
+# @app.route('/Fortest', methods=['GET', 'POST'])
+# def Fortest():
+#     testInfo = {}
+#     for i in range(5):
+#         testInfo[i] = {}
+#         testInfo[i]['day'] = '928'
+#     return json.dumps(testInfo)
 
 
-@app.route('/ForSendtest', methods=['POST'])
-def Forsendtest():
-    data = request.get_data(as_text=True)
-    datas = json.loads(data)
-    current_userid = datas['current_uid']
-    intid = int(current_userid)
-    all_friends_id = user_auth.show_friends(intid)
-    all_friends_name = []
-    for eachid in all_friends_id:
-        all_friends_name.append(user_auth.get_username_from_database(eachid[0]))
-    friends_list_json = {}
-    count = 0
-    for fn in all_friends_name:
-        friends_list_json[count] = {}
-        friends_list_json[count]['name'] = fn
-        count = count + 1
-    return json.dumps(friends_list_json)
+# @app.route('/ForSendtest', methods=['POST'])
+# def Forsendtest():
+#     data = request.get_data(as_text=True)
+#     datas = json.loads(data)
+#     current_userid = datas['current_uid']
+#     intid = int(current_userid)
+#     all_friends_id = user_auth.show_friends(intid)
+#     all_friends_name = []
+#     for eachid in all_friends_id:
+#         all_friends_name.append(user_auth.get_username_from_database(eachid[0]))
+#     friends_list_json = {}
+#     count = 0
+#     for fn in all_friends_name:
+#         friends_list_json[count] = {}
+#         friends_list_json[count]['name'] = fn
+#         count = count + 1
+#     return json.dumps(friends_list_json)
