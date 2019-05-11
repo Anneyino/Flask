@@ -1,7 +1,10 @@
 modification
 1. /signup is now POST only
 2. /login is now POST only
-2. /getAllFriends is now GET only
+3. /getAllFriends is now GET only
+4. /goForFriend is now GET only
+5. /friend is now GET only
+6. /searchUser is now GET only
 
 
 1. data inconsistent

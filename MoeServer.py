@@ -97,7 +97,7 @@ def get_all_friends():
     return json.dumps(data)
 
 
-@app.route('/GoForFriend', methods=['GET'])
+@app.route('/GoForFriend', methods=['POST'])
 def GoForFriend():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
@@ -130,6 +130,25 @@ def friendlist():
         friend_name = friend[1]
         friends_name.append(friend_name)
     return render_template("friendlistK.html", uid=uid, Friends=friends_name)
+
+
+@app.route('/searchUser', methods=['POST'])
+def Forsendtest():
+    # check login status
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = database.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+
+    keyword = request.form['searchContent']
+    users = database.search_user(keyword)
+    data = {'code': 'ok'}
+    user_names = {}
+    for idx, user in enumerate(users):
+        user_name = user[1]
+        user_names[idx] = user_name
+    data['data'] = user_names
+    return json.dump(data)
 
 
 # unrefactored

@@ -97,6 +97,12 @@ def get_all_friends(uid):
     friends = fetchAllres(sql_str, (uid,))
     return friends
 
+
+def search_user(keyword):
+    sql_str = "SELECT * FROM user WHERE username LIKE %s;"
+    users = fetchAllres(sql_str, (keyword,))
+    return users
+
 # values = fetchAllres("select * from user")
 # cursor.close() 
 # conn.close()  #最后记得关闭光标和连接，防止数据泄露
