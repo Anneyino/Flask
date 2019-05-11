@@ -56,8 +56,6 @@ def home():
     return render_template("home.html", mode=model_id, cos=costume_id)
 
 
-# unrefactored
-
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
@@ -65,10 +63,19 @@ def login():
     success = helper.check_login(username, password)
     if not success:
         return render_template("sign.html", error='wrong username and password')
-    time.sleep(3)
-    current_uid = user_auth.get_uid_from_database(username)
-    return render_template("home.html", user_id=current_uid)
 
+    # create session_id
+    session_id = helper.generate_session_id()
+    user = database.get_user_by_name(username)
+    uid = user[0]
+    database.insert_session(session_id, uid)
+
+    resp = redirect(url_for('home'))
+    resp.set_cookie('SESSION_ID', session_id)
+    return resp
+
+
+# unrefactored
 
 @app.route('/Fortest', methods=['GET', 'POST'])
 def Fortest():

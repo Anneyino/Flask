@@ -1,5 +1,5 @@
 1. data inconsistent
-
+2. no logout button
 
 security vulnerbilities
 1. server should store the hash of password instead of password itself
