@@ -21,7 +21,7 @@
 
   <script src="../static/js/jquery.1.9.1.min.js"></script>
   <script type="text/javascript" src="../static/js/jquery.charfirst.pinyin.js"></script>
-  <script type="text/javascript" src="../static/js/circlel.js"></script>
+  <script type="text/javascript" src="../static/js/circles.js"></script>
 
 </HEAD>
 
@@ -29,10 +29,12 @@
  <div class="header-two">
   <div>
     <i class="glyphicon glyphicon-chevron-left" onclick="back()"><a href="javascript:back()"></a> </i>
+    <form action="/searchUser" method = "POST">
     <div class="input">
       <span class="glyphicon glyphicon-search"></span> 
       <input id="search" type="text" />
     </div>
+    </form>
   </div>
 </div>
 <div id="uid" style="display:none;">{{uid}}</div>
@@ -53,11 +55,6 @@
   {{uid}}
 </div>
 
-<form>
-<div>
-<
-</div>
-<form>
 <div class="sort_box"></div>
 <script type="text/javascript">
   function printContent(){
@@ -76,7 +73,7 @@
             
             var htmlstr = '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
             '<div class = "num_name">' + redata.data[index] + '</div>' 
-            '<input type="text" id="uid" name="uid" value ="abc" style="display:none;"/>' +
+            +'<input type="text" id="fname" name="fname" value ='+ redata.data[index] +' style="display:none;"/>' +
             '</form>';
 
             var div0 = document.createElement("div");

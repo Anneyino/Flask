@@ -71,6 +71,10 @@ def insert_session(session_id, uid):
     sql_str = "INSERT INTO session(session_id, uid) VALUES(%s, %s);"
     executeSQL(sql_str, (session_id, uid))
 
+def set_user_current_hid(current_hid, uid):
+    sql_str = "UPDATE user SET current_hid=%s WHERE uid=%s;"
+    executeSQL(sql_str, (current_hid, uid))
+
 
 def insert_init_user_helper(uid):
     sql_str = "INSERT INTO user_helper VALUES(%s, %s, %s);"

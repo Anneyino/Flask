@@ -54,7 +54,7 @@ def home():
     helper = database.get_helper(current_hid)
     model_id = helper[1]
     costume_id = helper[2]
-    return render_template("home.html", mode=model_id, cos=costume_id)
+    return render_template("home.html", mode=model_id, cos=costume_id, show_button = "")
 
 
 @app.route('/login', methods=['POST'])
@@ -105,13 +105,14 @@ def GoForFriend():
     if not user:
         return render_template("sign.html", error='please login')
 
-    fid = request.form['uid']
-    user = database.get_user_by_uid(fid)
+    fname = request.form['fname']
+    print(fname)
+    user = database.get_user_by_name(fname) 
     current_hid = user[4]
     helper = database.get_helper(current_hid)
     model_id = helper[1]
     costume_id = helper[2]
-    return render_template("home.html", mode=model_id, cos=costume_id)
+    return render_template("home.html", mode=model_id, cos=costume_id, show_button="display:none;")
 
 
 @app.route('/friend', methods=['GET'])

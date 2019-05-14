@@ -26,7 +26,7 @@ $(function(){
 			
 		});
 		
-        $('.sort_list').click(function(){
+        $('.num_name').click(function(){
             /*var friendname = $(this).text();
             var data_friend = { "friend_name" : friendname };
             senddata_friend = JSON.stringify(data_friend);
@@ -40,11 +40,7 @@ $(function(){
                 alert(data.fid);
               }
              })*/
-            var friendname = $(this).text();
-            alert(friendname);
-            var target_form = $(this).find('gofriend');
-            alert(target_form.innerHTML);
-            console.log(target_form.innerHTML);
+            var target_form = $(this).parent();
             target_form.submit();           
 
         });
