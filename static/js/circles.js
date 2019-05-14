@@ -26,12 +26,14 @@ $(function(){
 			
 		});
 
-        $('.num_name').click(function(){
+        //取消关注按钮
+        $('.focus_btn').click(function(){
 
 
         }
 
-        $('.num_name').click(function(){
+        //关注按钮
+        $('.focus_btn-two').click(function(){
 
             
         }
@@ -72,7 +74,7 @@ $(function(){
             for(var i = 0;i<temp.length;i++){
                 htmlstr += '<div class = "sort_list-two">' +
                 '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
-                '<div class = "num_name-two">' + temp[i] + '</div>' +
+                '<div class = "num_name">' + temp[i] + '</div>' +
                 '<input type="text" id="fname" name="fname" value ="'+ temp[i] +'" style="display:none;"/>' +
                 '</form>'+
                 '<form class = "losefocusfriend" action = "/LoseFocusFriend" method = "POST">' +

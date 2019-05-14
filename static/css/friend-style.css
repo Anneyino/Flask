@@ -136,11 +136,6 @@ a,input,img,textarea,span,div{outline: 0;-webkit-tap-highlight-color:rgba(255,0,
   background: #e8e8e8;
 }
 
-.num_name-two{
-  color: #000;
-  display:inline-block;
-}
-
 .focus_btn-two{
   width: 100%;
   border: none;
