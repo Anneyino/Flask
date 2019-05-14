@@ -35,6 +35,13 @@ def signup(username, password, email):
         return False
     return True
 
+def log(info):
+    sql_str = "INSERT INTO loginfo(info) values(%s);"
+    try:
+        executeSQL(sql_str, (username, password, email))
+    except:
+        return False
+    return True
 
 def get_user_by_name(username):
     sql_str = "SELECT * FROM user WHERE username=%s;"

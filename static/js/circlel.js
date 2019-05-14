@@ -40,8 +40,9 @@ $(function(){
                 alert(data.fid);
               }
              })*/
-            alert($(this).innerHTML);
-            var target_form = $(this).find('.gofriend');
+            var friendname = $(this).text();
+            alert(friendname);
+            var target_form = $(this).find('gofriend');
             alert(target_form.innerHTML);
             console.log(target_form.innerHTML);
             target_form.submit();           

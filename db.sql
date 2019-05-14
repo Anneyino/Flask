@@ -22,6 +22,12 @@ CREATE TABLE friend(
     FOREIGN KEY(uid_secondary) REFERENCES user(uid)
 )charset=utf8;
 
+CREATE TABLE loginfo(
+    id INT AUTO_INCREMENT,
+    info VARCHAR(50),
+    PRIMARY KEY(id)
+)charset=utf8;
+
 CREATE TABLE helper(
     hid INT AUTO_INCREMENT,
     model_id INT,

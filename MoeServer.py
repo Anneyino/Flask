@@ -36,10 +36,8 @@ def signup():
     user = database.get_user_by_name(username)
     uid = user[0]
     database.insert_session(session_id, uid)
-
     # init user data
     helper.user_init(uid)
-
     resp = redirect(url_for('home'))
     resp.set_cookie('SESSION_ID', session_id)
     return resp
@@ -52,7 +50,6 @@ def home():
     user = database.get_user_by_session_id(session_id)
     if not user:
         return render_template("sign.html", error='please login')
-
     current_hid = user[4]
     helper = database.get_helper(current_hid)
     model_id = helper[1]
@@ -79,7 +76,7 @@ def login():
     return resp
 
 
-@app.route('/getAllFriends', methods=['GET'])
+@app.route('/getAllFriends', methods=['POST'])
 def get_all_friends():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
@@ -96,6 +93,7 @@ def get_all_friends():
         friend_name = friend[1]
         friends_name[idx] = friend_name
     data['data'] = friends_name
+    print(data)
     return json.dumps(data)
 
 
@@ -135,7 +133,7 @@ def friendlist():
 
 
 @app.route('/searchUser', methods=['POST'])
-def Forsendtest():
+def searchUser():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
     user = database.get_user_by_session_id(session_id)
@@ -150,11 +148,11 @@ def Forsendtest():
         user_name = user[1]
         user_names[idx] = user_name
     data['data'] = user_names
-    return json.dump(data)
+    return json.dumps(data)
 
 
 @app.route('/GoTolearn', methods=['POST'])
-def GoForFriend():
+def GoTolearn():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
     user = database.get_user_by_session_id(session_id)
@@ -168,7 +166,7 @@ def GoForFriend():
 
 
 @app.route('/Totalchapter', methods=['POST'])
-def Forsendtest():
+def Totalchapter():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
     user = database.get_user_by_session_id(session_id)
@@ -179,11 +177,11 @@ def Forsendtest():
     subject = database.get_subject(sid)
     chapter_no = subject[2]
     data = {'code': 'ok', "data": chapter_no}
-    return json.dump(data)
+    return json.dumps(data)
 
 
 @app.route('/learn', methods=['POST'])
-def friendlist():
+def learn():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
     user = database.get_user_by_session_id(session_id)
@@ -212,7 +210,7 @@ def friendlist():
 
 
 @app.route('/recordSchedule', methods=['POST'])
-def friendlist():
+def recordSchedule():
     # check login status
     session_id = request.cookies.get('SESSION_ID', '')
     user = database.get_user_by_session_id(session_id)

@@ -64,22 +64,21 @@
   
   var allNames = new Array("bbb");
   var box=document.getElementsByClassName("sort_box");
-  var idnode = document.getElementById("uids").innerText;
-  var data = { "current_uid" : idnode };
-  senddata = JSON.stringify(data);
    $.ajax({
        async: false,
-       url: "/ForSendtest",
+       url: "/getAllFriends",
        type: "POST",
-       data: senddata,
        dataType: "json",
-       success: function (data) {
+       success: function (redata) {
            var index = 0;
-           for(var d in data){
+           alert(redata.data[0]);
+           for(var d in redata.data){
+            
             var htmlstr = '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
-			'<div class = "num_name">' + data[index].name + '</div>' 
-			'<input type="text" id="uid" name="uid" value ="abc" style="display:none;"/>' +
-			'</form>';
+            '<div class = "num_name">' + redata.data[index] + '</div>' 
+            '<input type="text" id="uid" name="uid" value ="abc" style="display:none;"/>' +
+            '</form>';
+
             var div0 = document.createElement("div");
             div0.innerHTML = htmlstr;
             div0.className = "sort_list";
