@@ -136,6 +136,17 @@ a,input,img,textarea,span,div{outline: 0;-webkit-tap-highlight-color:rgba(255,0,
 }
 [class^="sort_list"] .num_name{
   color: #000;
+  display:inline-block;
+}
+
+[class^="sort_list"] .focus_btn{
+  width: 30%;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  float: right;
+  color: #21a4f4;
+  background: #e8e8e8;
 }
 
 .sort_letter{
