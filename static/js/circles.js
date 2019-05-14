@@ -75,10 +75,10 @@ $(function(){
                 htmlstr += '<div class = "sort_list-two">' +
                 '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
                 '<div class = "num_name">' + temp[i] + '</div>' +
-                '<input type="text" id="fname" name="fname" value ="'+ temp[i] +'" style="display:none;"/>' +
+                '<input type="text" id="fname" name="fname" value ='+ temp[i] +' style="display:none;"/>' +
                 '</form>'+
                 '<form class = "losefocusfriend" action = "/LoseFocusFriend" method = "POST">' +
-                '<input type="text" id="uid" name="uid" value ="' + temp[i] + '" style="display:none;"/>' +
+                '<input type="text" id="uid" name="uid" value =' + temp[i] + ' style="display:none;"/>' +
                 '<button type="submit" class="focus_btn-two">未关注</button>' +
                 '</form>' +
                 '</div>';
