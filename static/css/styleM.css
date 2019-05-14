@@ -110,6 +110,8 @@ canvas{
 .login-center-input-text{background: white;padding: 0 5px;position: absolute;z-index: 0;opacity: 0;height: 20px;top: 50%;margin-top: -10px;font-size: 14px;left: 5px;color: dodgerblue;line-height: 20px;transition: all 0.5s;-moz-transition: all 0.5s;	/* Firefox 4 */-webkit-transition: all 0.5s;	/* Safari 和 Chrome */-o-transition: all 0.5s;	/* Opera */}
 .login-center-input input:focus~.login-center-input-text{top: 0;z-index: 3;opacity: 1;margin-top: -15px;}
 .login.active{-webkit-animation: login-small 0.8s ; animation: login-small 0.8s ;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards}
-.login-button{cursor: pointer;width: 80%;text-align: center;height: 40px;line-height: 40px;background-color: dodgerblue;border:none; border-radius: 10px;margin: 0 10%;margin-top: 10%;color: white;}
+.login-button{position:absolute;width: 80%;text-align: center;height: 40px;line-height: 40px;background-color: dodgerblue;border: none;border-radius: 10px;margin: auto 8%;color: white;}
 
-.sign-button{cursor: pointer;width: 80%;text-align: center;height: 40px;line-height: 40px;background-color: dodgerblue;border:none; border-radius: 10px;margin: 0 10%;margin-top: 10%;color: white;}
+.sign-button{position:absolute;width: 80%;text-align: center;height: 40px;line-height: 40px;background-color: dodgerblue;border: none;border-radius: 10px;margin: auto 8%;color: white;}
+
+.signText{position:absolute;width: 80%;margin-left: 8%;text-align: center; bottom: 5%;}
