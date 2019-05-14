@@ -25,19 +25,39 @@ $(function(){
 			$('#search').focus();
 			
 		});
+        
+         //取消关注按钮
+         $('.focus_btn').click(function(){
+          var friendname = $(this).prev().val()  
+          var form_remove = $(this).parent();
+          var remove_friend = confirm("是否取消对"+friendname+"的关注？");
+          if(remove_friend==true){
+           form_remove.submit();
+          }else{
+              return;
+          }
 
-        //取消关注按钮
-        $('.focus_btn').click(function(){
-
-
-        }
+        });
 
         //关注按钮
         $('.focus_btn-two').click(function(){
+          var parentForm = $(this).parent();
+          if($(this).text()=="未关注"){
+              parentForm.attr('action',"/FocusFriend");
+              parentForm.submit();
+          }else{
+              var friendname = $(this).prev().val()
+              var remove_friend = confirm("是否取消对"+friendname+"的关注？");
+              if(remove_friend == true){
+              parentForm.attr('action',"/NoFocusFriend");
+              parentForm.submit();
+              }else{
+                  return;
+              }
 
+          }
             
-        }
-
+        });
 		
         $('.num_name').click(function(){
             /*var friendname = $(this).text();
@@ -65,25 +85,33 @@ $(function(){
             if(val==""){
                 return;
             }
-            
-            var htmlstr="";
-
-            //从服务器获得的数组
-            var temp= new Array("aaa","bbb","ccc");
-
-            for(var i = 0;i<temp.length;i++){
-                htmlstr += '<div class = "sort_list-two">' +
-                '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
-                '<div class = "num_name">' + temp[i] + '</div>' +
-                '<input type="text" id="fname" name="fname" value ='+ temp[i] +' style="display:none;"/>' +
-                '</form>'+
-                '<form class = "losefocusfriend" action = "/LoseFocusFriend" method = "POST">' +
-                '<input type="text" id="uid" name="uid" value =' + temp[i] + ' style="display:none;"/>' +
-                '<button type="submit" class="focus_btn-two">未关注</button>' +
-                '</form>' +
-                '</div>';
-            }
-            $('.sort_box-two').html(htmlstr);
+            var data = {"Searchkeyword" : val};
+            senddata = JSON.stringify(data);            
+            $.ajax({
+                async: true,
+                url: "/searchUser",
+                type: "POST",
+                data: senddata,
+                dataType: "json",
+                success: function (redata) {
+                    var index = 0;
+                    var htmlstr="";
+                    for(var d in redata.data){
+                        htmlstr += '<div class = "sort_list-two">' +
+                        '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
+                        '<div class = "num_name">' + redata.data[index] + '</div>' +
+                        '<input type="text" id="fname" name="fname" value ='+ redata.data[index] +' style="display:none;"/>' +
+                        '</form>'+
+                        '<form class = "losefocusfriend" action = "" method = "POST">' +
+                        '<input type="text" id="uid" name="uid" value =' + redata.data[index] + ' style="display:none;"/>' +
+                        '<button type="submit" class="focus_btn-two">'+ redata.isfriend[index] +'</button>' +
+                        '</form>' +
+                        '</div>';
+                        index = index + 1;
+                 }
+                 $('.sort_box-two').html(htmlstr);  
+                }
+            }) 
         });
 
         var Initials=$('.initials');

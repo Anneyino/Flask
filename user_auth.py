@@ -1,5 +1,5 @@
 from functools import wraps
-import database
+import databaseq
 from flask import *
 import sys
 

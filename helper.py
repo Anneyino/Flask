@@ -1,5 +1,5 @@
 import random
-import database
+import databaseq
 
 
 def generate_session_id():
@@ -7,12 +7,12 @@ def generate_session_id():
 
 
 def user_init(uid):
-    database.insert_init_user_helper(uid)
-    database.insert_init_user_subject(uid)
+    databaseq.insert_init_user_helper(uid)
+    databaseq.insert_init_user_subject(uid)
 
 
 def check_login(username, passwd):
-    currect_passwd = database.get_password(username)
+    currect_passwd = databaseq.get_password(username)
     if not currect_passwd:
         return False
     return currect_passwd == passwd

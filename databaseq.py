@@ -108,10 +108,24 @@ def get_all_friends(uid):
     friends = fetchAllres(sql_str, (uid,))
     return friends
 
+def check_friend(uid_p,uid_s):
+    sql_str = "SELECT * FROM friend WHERE uid_primary = %s and uid_secondary= %s;"
+    isfriend = fetchOneres(sql_str, (uid_p, uid_s))
+    if not isfriend:
+        return False
+    return True
+
+def add_friend(uid_p,uid_s):
+    sql_str = "INSERT INTO friend VALUES(%s, %s);"
+    executeSQL(sql_str, (uid_p, uid_s))
+
+def del_friend(uid_p,uid_s):
+    sql_str = "DELETE FROM friend WHERE uid_primary = %s and uid_secondary = %s;"
+    executeSQL(sql_str,(uid_p, uid_s))
 
 def search_user(keyword):
-    sql_str = "SELECT * FROM user WHERE username LIKE %s;"
-    users = fetchAllres(sql_str, (keyword,))
+    sql_str = "SELECT * FROM user WHERE username LIKE %s %s;"
+    users = fetchAllres(sql_str, (keyword,"%"))
     return users
 
 

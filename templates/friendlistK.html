@@ -8,7 +8,7 @@
   <META NAME="Keywords" CONTENT="">
   <META NAME="Description" CONTENT="">
   <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" type="text/css" href="../static/css/friend-style.css"/>
+  <link rel="stylesheet" type="text/css" href="../static/css/friend-styles.css"/>
   <!-- Fonts -->
   <link
   href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400'
@@ -21,7 +21,7 @@
 
   <script src="../static/js/jquery.1.9.1.min.js"></script>
   <script type="text/javascript" src="../static/js/jquery.charfirst.pinyin.js"></script>
-  <script type="text/javascript" src="../static/js/circles.js"></script>
+  <script type="text/javascript" src="../static/js/circlez.js"></script>
 
 </HEAD>
 
@@ -29,10 +29,10 @@
  <div class="header-two">
   <div>
     <i class="glyphicon glyphicon-chevron-left" onclick="back()"><a href="javascript:back()"></a> </i>
-    <form action="/searchUser" method = "POST">
+    <form action="/searchUser" id = "searchForm" method = "POST">
     <div class="input">
       <span class="glyphicon glyphicon-search"></span> 
-      <input id="search" type="text" />
+      <input name="search" id="search" type="text" />
     </div>
     </form>
   </div>
@@ -61,7 +61,7 @@
   
   var allNames = new Array("bbb");
   var box=document.getElementsByClassName("sort_box");
-   $.ajax({
+  $.ajax({
        async: false,
        url: "/getAllFriends",
        type: "POST",
@@ -72,11 +72,11 @@
            for(var d in redata.data){
             
             var htmlstr = '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
-            '<div class = "num_name">' + redata.data[index] + '</div>' +
-            +'<input type="text" id="fname" name="fname" value ='+ redata.data[index] +' style="display:none;"/>' +
+            '<div class = "num_name">' + redata.data[index] + '</div>'+
+            '<input type="text" id="fname" name="fname" value ='+ redata.data[index] +' style="display:none;"/>' +
             '</form>'+
             '<form class = "focusfriend" action = "/FocusFriend" method = "POST">' +
-            '<input type="text" id="uid" name="uid" value = '+ redata.data[index]' style="display:none;"/>' +
+            '<input type="text" id="uid" name="uid" value = ' + redata.data[index] + ' style="display:none;"/>' +
             '<button type="submit" class="focus_btn">已关注</button>' +
             '</form>';
 
