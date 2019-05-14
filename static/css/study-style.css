@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+ font-size:16px;
+ background-color: #f3f3f3;
+}
+
+.header-one{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 45px;
+  background-color: #d8d8d8;
+}
+.home-container{
+  position: fixed;
+  width: 30%;
+  height: 45px;
+  background-color: #f3f3f3;
+}
+.home{
+  width: 45px;
+  height: 45px;
+  float: left;
+}
+.home img{
+  width: 100%;
+  height: 100%;
+}
+.word-nums{
+  margin-top: 5px;
+}
+.studing-words{
+  margin-left: 10%;
+  font-size: 12px;
+}
+.studied-words{
+  margin-left: 10%;
+  font-size: 12px;
+}
+.word-back{
+  font-size: 18px;
+  float: right;
+  margin-right: 10%;
+  margin-top: 10px;
+  display:inline-block;
+}
+.total-word{
+  margin-top: 10%;
+  width: 100%;
+  height: auto;
+}
+.word{
+  width: 70%;
+  height: auto;
+  margin-top: 60%;
+  margin-left: auto;
+  font-size: 50px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.meaning{
+  width: 80%;
+  height: auto;
+  font-size: 24px;
+  margin-top: 30%;
+  margin-left: 10%;
+  background-color: #d8d8d8; 
+  border-radius: 5px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.footstrap{
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  bottom: 0px;
+}
+.collect{
+  margin-left: 5%;
+  background-color: #f3f3f3;
+  outline: none;
+  display:inline-block;
+}
+.collect_img{
+  width: 40px;
+  height: 40px;
+}
+
+.recognized{
+  width: 25%;
+  float: right;
+  border-radius: 10px;
+  border-color: #d8d8d8;
+  outline: none;
+  margin-right: 10%;
+  font-size: 18px;
+  background-color: #f3f3f3;
+  display:inline-block;
+}
+.recognizing{
+  width: 25%;
+  float: right;
+  border-radius: 10px;
+  border-color: #d8d8d8;
+  outline: none;
+  margin-right: 5%;
+  font-size: 18px;
+  background-color: #f3f3f3;
+  display:inline-block;
+}
+
+.footstrap-two{
+  width: 100%;
+  height: 30px;
+  position: fixed;
+  bottom: 0px;
+}
+.collect-two{
+  margin-left: 5%;
+  font-size: 18px;
+  display:inline-block;
+}
+.continue{
+  width: 30%;
+  float: right;
+  border-radius: 10px;
+  border-color: #d8d8d8;
+  outline: none;
+  margin-right: 5%;
+  font-size: 18px;
+  background-color: #f3f3f3;
+  display:inline-block;
+}

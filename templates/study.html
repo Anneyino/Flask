@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  <TITLE>好友列表</TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" type="text/css" href="../static/css/study-style.css"/>
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="../static/js/study.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://www.huangwx.cn/css/sweetalert.css">
+  <script type="text/javascript" src="https://www.huangwx.cn/js/sweetalert-dev.js"></script>
+
+</head>
+<body>
+
+
+<div class="header-one">
+  <div class="home-container">
+    <div class="home" onclick="homeClick()">
+    	<img src="images/home.png">
+    </div>
+    <div class="word-nums"></div>
+  </div>
+  <div class="word-back" onclick="backClick()"></div>
+</div>
+
+<div class="total-word"></div>
+
+<div class="footstrap-two"></div>
+
+<div class="footstrap">
+	<button class="collect" onclick="collectClick()">
+  </button>
+	<button class="recognized" onclick="updatePage(1)">认识的</button>
+	<button class="recognizing" onclick="updatePage(0)">不认识的</button>
+</div>
+
+<script type="text/javascript">
+  printWord();
+</script>
+
+</body>
+</html>
