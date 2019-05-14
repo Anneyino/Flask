@@ -25,6 +25,17 @@ $(function(){
 			$('#search').focus();
 			
 		});
+
+        $('.num_name').click(function(){
+
+
+        }
+
+        $('.num_name').click(function(){
+
+            
+        }
+
 		
         $('.num_name').click(function(){
             /*var friendname = $(this).text();
@@ -45,34 +56,34 @@ $(function(){
 
         });
 
-		$('#search').bind('input propertychange', function() { 
-			$('.sort_box-two').html('');
-			 //进行相关操作 
-			var val=$(this).val();
-			if(val==""){
-				return;
-			}
-			var str="";
-			//去查找原字符串及其拼音首字母是否包含此字符，若包含就把它加进去
-			$(".sort_list").each(function() {
-				//var name=$(this).find('.num_name').text();   
-				if(name.toLowerCase().indexOf(val.toLowerCase()) != -1){//包含
-					str+="<div class='sort_list-two' id='"+$(this).attr('id')+"'> "+$(this).html()+"</div>";
-				}else{
-					var PYarr = makePy(name);
-					for(var i=0;i<PYarr.length;i++){
-						
-						if(PYarr[i].toLowerCase().indexOf(val.toLowerCase()) != -1){//包含
-							str+="<div class='sort_list-two' id='"+$(this).attr('id')+"'> "+$(this).html()+"</div>";
-						}else{//不包含
-							
-						}
-					}
-				}
-		        
-		    });
-			$('.sort_box-two').html(str);
-		});
+        $('#search').bind('input propertychange', function() { 
+            $('.sort_box-two').html('');
+             //进行相关操作 
+            var val=$(this).val();
+            if(val==""){
+                return;
+            }
+            
+            var htmlstr="";
+
+            //从服务器获得的数组
+            var temp= new Array("aaa","bbb","ccc");
+
+            for(var i = 0;i<temp.length;i++){
+                htmlstr += '<div class = "sort_list-two">' +
+                '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
+                '<div class = "num_name-two">' + temp[i] + '</div>' +
+                '<input type="text" id="fname" name="fname" value ="'+ temp[i] +'" style="display:none;"/>' +
+                '</form>'+
+                '<form class = "losefocusfriend" action = "/LoseFocusFriend" method = "POST">' +
+                '<input type="text" id="uid" name="uid" value ="' + temp[i] + '" style="display:none;"/>' +
+                '<button type="submit" class="focus_btn-two">未关注</button>' +
+                '</form>' +
+                '</div>';
+            }
+            $('.sort_box-two').html(htmlstr);
+        });
+
         var Initials=$('.initials');
         var LetterBox=$('#letter');
         Initials.find('ul').append('<li>A</li><li>B</li><li>C</li><li>D</li><li>E</li><li>F</li><li>G</li><li>H</li><li>I</li><li>J</li><li>K</li><li>L</li><li>M</li><li>N</li><li>O</li><li>P</li><li>Q</li><li>R</li><li>S</li><li>T</li><li>U</li><li>V</li><li>W</li><li>X</li><li>Y</li><li>Z</li><li>#</li>');
