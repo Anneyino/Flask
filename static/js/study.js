@@ -24,7 +24,6 @@ function printImg(){
 }
 
 function printWord(){ 
-  alert("printWord call");
   console.log(all_words);
   var word_nums = document.getElementsByClassName("word-nums")[0];
   var studing_words = document.createElement("span");
@@ -202,7 +201,6 @@ function confirmClick(){
    
   var data = {"chapter" : selectedChapter};
   senddata = JSON.stringify(data);    
-  alert("hello");
   $.ajax({
     async: false,
     url: "/learn",

@@ -23,7 +23,6 @@ $(document).ready(function() {
 
     //返回按钮
     $('.bottom a').click(function(e) {
-        
     });
     // Click on button function list
     $('.app ul').on('click', 'li .check_button', function(e) {
