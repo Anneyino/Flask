@@ -4,6 +4,8 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/assets/waifu.css"/>
         <link rel="stylesheet" href="../static/css/Buttonstyle.css">
+        <link rel="stylesheet" href="../static/css/to-do-list.css">
+        <link rel="stylesheet" href="../static/css/jump.css">
 </head>
 <body background = "../static/img/bg.jpg" style = "background-repeat: no-repeat; background-size:100% 100%; background-attachment: fixed;">
 <div style={{show_button}}>
@@ -18,8 +20,86 @@
         <button type="submit" class="btn">好友</button>
     </div>  
     </form>
-</div>    
+    <div class="btn-wrapper-for-list">
+        <button type="submit" class="btn">待办列表</button>
+    </div>
+</div>
+
+ <!--  选择章节  -->
+<div id="background" class="back">
+        <div id="div1" class="content">
+            <div id="close">
+                <span id="close-button">×</span>
+                <h2>选择章节</h2>
+            </div>
+            <div id="div2">
+                <select id="chapters">
+                    <option value="chapter">1</option>
+                    <option value="chapter">2</option>
+                    <option value="chapter">3</option>
+                    <option value="chapter">4</option>
+                    <option value="chapter">5</option>
+                    <option value="chapter">6</option>
+                    <option value="chapter">7</option>
+                    <option value="chapter">8</option>
+                    <option value="chapter">9</option>
+                    <option value="chapter">10</option>
+                    <option value="chapter">11</option>
+                    <option value="chapter">12</option>
+                    <option value="chapter">13</option>
+                    <option value="chapter">14</option>
+                    <option value="chapter">15</option>
+                    <option value="chapter">16</option>
+                    <option value="chapter">17</option>
+                    <option value="chapter">18</option>
+                    <option value="chapter">19</option>
+                    <option value="chapter">20</option>
+                    <option value="chapter">30</option>
+                    <option value="chapter">31</option>
+                    <option value="chapter">32</option>
+                    <option value="chapter">33</option>
+                    <option value="chapter">34</option>
+                    <option value="chapter">35</option>
+                    <option value="chapter">36</option>
+                    <option value="chapter">37</option>
+                    <option value="chapter">38</option>
+                    <option value="chapter">39</option>
+                    <option value="chapter">40</option>
+                    <option value="chapter">41</option>
+                    <option value="chapter">42</option>
+                    <option value="chapter">43</option>
+                    <option value="chapter">44</option>
+                    <option value="chapter">45</option>
+                    <option value="chapter">46</option>
+                    <option value="chapter">47</option>
+                    <option value="chapter">48</option>
+                    <option value="chapter">49</option>
+                    <option value="chapter">50</option>
+                </select>
+            </div>
+            <button type="button" id="confirm">确认</button>
+        </div>
+    </div>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="container" style="display: none;">
+    <!--  Tasks List  -->
+    <div id="tasks">
+        <div id="notification">Your task list is empty.</div>
+        <ul id="tasksList">
+        </ul>
+    </div>
+
+    <div id="footer">
+        <input id="taskInput" type="text" placeholder="Your task" />
+        <button id="taskAdd">Add</button>
+    </div>
+</div>
+
        <script  src="../static/js/ButtonFunc.js"></script>
+       <script  src="../static/js/to-do-list.js"></script>
+       <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript">
     /* 把 autoload.js 内容直接内置 */
     $('body').append('<div class="waifu"><div class="waifu-tips"></div><canvas id="live2d" class="live2d"></canvas><div class="waifu-tool"><span class="fui-home"></span> <span class="fui-chat"></span> <span class="fui-eye"></span> <span class="fui-user"></span> <span class="fui-photo"></span> <span class="fui-info-circle"></span> <span class="fui-cross"></span></div></div>');
