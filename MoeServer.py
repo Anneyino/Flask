@@ -351,6 +351,33 @@ def GetAllCollectWords():
     data['data'] = collectlist
     return json.dumps(data)    
 
+@app.route('/AddToCollect', methods = ['POST'])
+def AddToCollect():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+    data = {'code': 'ok'}
+    current_uid = user[0]
+    data_recv = request.get_data(as_text = True)
+    data_recv_json = json.loads(data_recv)
+    word = data_recv_json['word']
+    databaseq.add_collect(uid,word)
+
+    return json.dumps(data)
+
+@app.route('/RemoveFromCollect', methods = ['POST'])
+def RemoveFromCollect():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+    data = {'code': 'ok'}
+    current_uid = user[0]
+    data_recv = request.get_data(as_text = True)
+    data_recv_json = json.loads(data_recv)
+    
+
 @app.route('/recordSchedule', methods=['POST'])
 def recordSchedule():
     # check login status

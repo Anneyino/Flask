@@ -138,6 +138,9 @@ def check_collect(uid,word):
     if not iscollect:
         return False
     return True
+def del_collect(uid,word):
+    sql_str = "DELETE FROM collect_word WHERE uid = %s and word = %s;"
+    executeSQL(sql_str,(uid, word)) 
 
 def get_collect(uid):
     sql_str = "SELECT word FROM collect_word WHERE uid = %s;"
