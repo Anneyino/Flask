@@ -168,6 +168,52 @@ def searchUser():
     data['action'] = frontend_action
     return json.dumps(data)
 
+@app.route('/ShowToDoList', methods =['POST'])
+def ShowToDoList():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+    
+    current_uid = user[0]
+    data = {'code': 'ok'}
+    user_todos = databaseq.get_user_todo(current_uid)
+    todolist = {}
+    for idx, todo in enumerate(user_todos):
+        todolist[idx] = todo[0]
+    data['data'] = todolist
+    return json.dumps(data)
+
+@app.route('/AddToDoList', methods = ['POST'])
+def AddToDoList():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+    
+    data = {'code': 'ok'}
+    current_uid = user[0]
+    data_recv = request.get_data(as_text = True)
+    data_recv_json = json.loads(data_recv)
+    event = data_recv_json['newevent']
+    databaseq.add_todo(current_uid, event)
+    return json.dumps(data)
+    
+@app.route('/RemoveFromToDo', methods = ['POST'])
+def RemoveFromToDo():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+    data = {'code': 'ok'}
+    current_uid = user[0]
+    data_recv = request.get_data(as_text = True)
+    data_recv_json = json.loads(data_recv)
+    event = data_recv_json['event']
+    databaseq.del_todo(current_uid, event)
+    return json.dumps(data)
+
+
 @app.route('/FocusFriend', methods = ['POST'])
 def FocusFriend():
     session_id = request.cookies.get('SESSION_ID', '')
@@ -179,7 +225,6 @@ def FocusFriend():
     fname = request.form['uid']
     friend = databaseq.get_user_by_name(fname)
     fid = friend[0]
-    print(fid)
     databaseq.add_friend(current_uid,fid)
 
     resp = redirect(url_for('friendlist'))
@@ -210,8 +255,10 @@ def GoTolearn():
         return render_template("sign.html", error='please login')
 
     uid = user[0]
-    sid = request.form['subjectID']
+    #sid = request.form['subjectID'] 为测试暂时先用1：english代替
+    sid = 1
     progress = databaseq.get_progress(uid, sid)
+    alert_str = ""
     if progress != 0:
         alert_str = "记录到上次学习至" + progress +"章节, 是否继续学习？"
 
@@ -244,7 +291,8 @@ def learn():
     if not user:
         return {'code': 'no user'}
 
-    sid = request.form['subjectID']
+    #sid = request.form['subjectID'] 为测试暂时用1替代
+    sid = 1
     chapter = request.form['chapter']
     subject = databaseq.get_subject(sid)
 

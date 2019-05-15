@@ -31,19 +31,50 @@
 
                 //Appending li with input value
                 $tasksList.append("<li>" + $taskInput.val() + "<button class='delete'><span><i class='fa fa-trash-o'></i></span></button></li>");
+                
+                //Insert to database
+                var val = $taskInput.val();
 
+                var data = {"newevent" : val};
+                senddata = JSON.stringify(data);            
+                $.ajax({
+                    async: true,
+                    url: "/AddToDoList",
+                    type: "POST",
+                    data: senddata,
+                    dataType: "json",
+                    success: function (redata) {
+                     
+                    }
+                    }
+                ) 
                 //Cleaning input after add
                 $taskInput.val("");
+
 
                 //Display/Hide Notification
                 displayNotification();
 
                 //Attaching even handler to delete button
                 $(".delete").on("click", function() {
-
+                     
                     //Assigning "this" to varible, as it doesn't
                     //work correctly with setTimeout() function
                     var $parent = $(this).parent();
+                    var text = $parent.text();
+                    var data_to_delete = {"event" : text};
+                    senddata_delete = JSON.stringify(data_to_delete);
+                    $.ajax({
+                        async: true,
+                        url: "/RemoveFromToDo",
+                        type: "POST",
+                        data: senddata_delete,
+                        dataType: "json",
+                        success: function (redata) {
+                         
+                        }
+                        }
+                    )
 
                     //上传数据  $parent
                     //Displaying CSS animation
