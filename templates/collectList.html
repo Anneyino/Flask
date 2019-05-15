@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="../static/css/collectList.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/js/collectList.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="align">
+
+            <!------ To-Do List App ----->
+            <div class="app">
+
+                <div class="info">
+                    <div class="date">
+                        <!-- Here we append day and month -->
+                    </div>
+                    <div class="info-bottom">
+                        <div class="left">
+                            <p id="count">0</p>
+                            <p id="tasks">总数</p>
+                        </div>
+                        <div class="middle">
+                            <p id="remaining_done">0</p>
+                            <p id="remaining_tasks">剩余</p>
+                        </div>
+                        <div class="right">
+                            <p id="count_done">0</p>
+                            <p id="tasks_done">已记</p>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="wordList">
+                    <p id="today">已收藏单词</p>
+                    <script type="text/javascript">
+                        function createList(list) {
+                            for (var index in list) {
+                                var str =
+                                    '<a rel="nofollow" rel="noreferrer" href="" class="check_button" onmousedown="return false">' +
+                                    '<i class="fa fa-circle-thin" aria-hidden="true"></i>' +
+                                    '</a>' +
+                                    '<div class="right">' +
+                                    '<p contenteditable="true">' + list[index] + '</p>' +
+                                    '</div>' +
+                                    '<span class="delete_button" onmousedown="return false">' +
+                                    '<i class="fa fa-minus" aria-hidden="true"></i>' +
+                                    '</span>';
+                                var li=document.createElement('li');
+                                li.innerHTML=str;
+                                document.getElementById('wordList').appendChild(li);
+                            }
+                        }
+                        var list=new Array("word","car","moe");
+                        createList(list);
+                    </script>
+
+                </ul>
+
+                <div class="bottom">
+                    <a rel="nofollow" rel="noreferrer" href="" onmousedown="return false">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Back
+                    </a>
+                </div>
+
+            </div>
+            <!----- End To-Do List ------->
+
+        </div>
+    </div>
+</body>
+
+</html>
