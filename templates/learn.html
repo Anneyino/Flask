@@ -9,8 +9,7 @@
   <META NAME="Description" CONTENT="">
   <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="stylesheet" type="text/css" href="../static/css/study-style.css"/>
-  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../static/css/jump.css"/>
   <script type="text/javascript" src="../static/js/study.js"></script>
   <link rel="stylesheet" type="text/css" href="https://www.huangwx.cn/css/sweetalert.css">
   <script type="text/javascript" src="https://www.huangwx.cn/js/sweetalert-dev.js"></script>
@@ -18,11 +17,65 @@
 </head>
 <body>
 
+ <!--  选择章节  -->
+<div id="div1" class="content">
+  <div id="close">
+    <span id="close-button">×</span>
+    <h2>选择章节</h2>
+  </div>
+  <div id="div2">
+    <select id="chapters">
+      <option value="chapter">1</option>
+      <option value="chapter">2</option>
+      <option value="chapter">3</option>
+      <option value="chapter">4</option>
+      <option value="chapter">5</option>
+      <option value="chapter">6</option>
+      <option value="chapter">7</option>
+      <option value="chapter">8</option>
+      <option value="chapter">9</option>
+      <option value="chapter">10</option>
+      <option value="chapter">11</option>
+      <option value="chapter">12</option>
+      <option value="chapter">13</option>
+      <option value="chapter">14</option>
+      <option value="chapter">15</option>
+      <option value="chapter">16</option>
+      <option value="chapter">17</option>
+      <option value="chapter">18</option>
+      <option value="chapter">19</option>
+      <option value="chapter">20</option>
+      <option value="chapter">30</option>
+      <option value="chapter">31</option>
+      <option value="chapter">32</option>
+      <option value="chapter">33</option>
+      <option value="chapter">34</option>
+      <option value="chapter">35</option>
+      <option value="chapter">36</option>
+      <option value="chapter">37</option>
+      <option value="chapter">38</option>
+      <option value="chapter">39</option>
+      <option value="chapter">40</option>
+      <option value="chapter">41</option>
+      <option value="chapter">42</option>
+      <option value="chapter">43</option>
+      <option value="chapter">44</option>
+      <option value="chapter">45</option>
+      <option value="chapter">46</option>
+      <option value="chapter">47</option>
+      <option value="chapter">48</option>
+      <option value="chapter">49</option>
+      <option value="chapter">50</option>
+    </select>
+  </div>
+  <button type="button" id="confirm" onclick="confirmClick()">确认</button>
+</div>
+
 
 <div class="header-one">
   <div class="home-container">
     <div class="home" onclick="homeClick()">
-    	<img src="images/home.png">
+    	<img src="../static/img/home.png">
     </div>
     <div class="word-nums"></div>
   </div>
@@ -39,10 +92,6 @@
 	<button class="recognized" onclick="updatePage(1)">认识的</button>
 	<button class="recognizing" onclick="updatePage(0)">不认识的</button>
 </div>
-
-<script type="text/javascript">
-  printWord();
-</script>
 
 </body>
 </html>

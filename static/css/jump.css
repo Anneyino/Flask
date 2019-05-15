@@ -1,15 +1,8 @@
 #open_btn {
-	background: #eff313;
-}
- 
-#background {
-	display: none;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,0.5);
+	border: none;
+	border-radius: 10px;
+	outline: none;
+	background: #f3f3f3;
 }
  
 #div1 {

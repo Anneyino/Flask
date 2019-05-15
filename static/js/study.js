@@ -8,14 +8,16 @@ var last_word = new Array();
 var last_copy = new Array();
 
 
+
+
 function printImg(){
   var collect_btn = document.getElementsByClassName("collect")[0];
   var img = document.createElement("img");
   if(word_collect[target_num] == 1){
-    img.src = "./img/Collected.png";
+    img.src = "../static/img/Collected.png";
   }
   else{
-    img.src = "./img/Collecting.png";
+    img.src = "../static/img/Collecting.png";
   }
   img.className = "collect_img";
   img.value = word_collect[target_num];
@@ -48,13 +50,17 @@ function printWord(){
   target_num++;
 }
 
+function confirmClick(){
+  printWord();
+}
+
 function updateImg(i){
   var img = document.getElementsByClassName("collect_img")[0];
   if(word_collect[i] == 1){
-    img.src = "./img/Collected.png";
+    img.src = "../static/img/Collected.png";
   }
   else{
-    img.src = "./img/Collecting.png";
+    img.src = "../static/img/Collecting.png";
   }
   img.value = word_collect[i];
 }
