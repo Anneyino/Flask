@@ -12,9 +12,11 @@ function printImg(){
   var img = document.createElement("img");
   if(word_collect[target_num] == 1){
     img.src = "../static/img/Collected.png";
+    collect_btn.value = 1;
   }
   else{
     img.src = "../static/img/Collecting.png";
+    collect_btn.value = 0;
   }
   img.className = "collect_img";
   img.value = word_collect[target_num];
@@ -50,12 +52,15 @@ function printWord(){
 }
 
 function updateImg(i){
+  var collect_btn = document.getElementsByClassName("collect")[0];
   var img = document.getElementsByClassName("collect_img")[0];
   if(word_collect[i] == 1){
     img.src = "../static/img/Collected.png";
+    collect_btn.value = 1;
   }
   else{
     img.src = "../static/img/Collecting.png";
+    collect_btn.value = 0;
   }
   img.value = word_collect[i];
 }
