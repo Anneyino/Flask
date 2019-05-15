@@ -28,6 +28,7 @@ span {
 }
 
 #chapters {
+	width: 50%;
     margin-left: 40%;
 }
 
@@ -55,6 +56,7 @@ span {
 }
  
 h2 {
+	left: auto;
 	margin: 10px 0;
 	color: rgb(0, 183, 207);
 	padding-left: 15px;
