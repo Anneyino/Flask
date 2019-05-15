@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>获取地理位置</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/map.css"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=67c1beea29932dafa5b21bbd64fd360c"></script>
+<!--    <script type="text/javascript" src="../static/js/map.js"></script>-->
+</head>
+
+<body>
+    <div id="container"></div>
+    <div class="map-controller">
+        <div class="dashboard">
+            <table id="table">
+                <tr>
+                    <th>运动时间</th>
+                    <th>速度</th>
+                    <th>距离</th>
+                </tr>
+                <tr>
+                    <td>00:00:00</td>
+                    <td>0.00</td>
+                    <td>0</td>
+                </tr>
+            </table>
+            <table id="table2">
+                <tr>
+                    <th><button class="button" id="start" onclick="start()">开始</button></th>
+                    <th><button class="button" id="quit">退出</button></th>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var mapObj = new AMap.Map('container', {
+            dragEnable: true,
+            zoomEnable: true,
+        });
+        var time;
+        var distance;
+        var speed;
+        var timer=null;
+        var lblTime = document.getElementById("table").rows[1].cells[0];
+        var lblSpeed = document.getElementById("table").rows[1].cells[1];
+        var lblDis = document.getElementById("table").rows[1].cells[2];
+        var btn = document.getElementById("start");
+        mapObj.plugin('AMap.Geolocation', function() {
+            geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true, // 是否使用高精度定位，默认:true
+                timeout: 10000, //超过10秒后停止定位，默认：无穷大
+                maximumAge: 0, // 定位结果缓存0毫秒，默认：0
+                convert: true, // 自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+                showButton: false, // 显示定位按钮，默认：true
+                showMarker: true, // 定位成功后在定位到的位置显示点标记，默认：true
+                showCircle: true, // 定位成功后用圆圈表示定位精度范围，默认：true
+                panToLocation: true, // 定位成功后将定位到的位置作为地图中心点，默认：true
+                zoomToAccuracy: true, // 定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+            });
+            mapObj.addControl(geolocation);
+            geolocation.getCurrentPosition();
+            //AMap.event.addListener(geolocation, 'complete', onComplete); // 返回定位信息
+            AMap.event.addListener(geolocation, 'error', onError); // 返回定位出错信息
+        });
+        geolocation.watchPosition();
+
+        function start() {
+            if (btn.innerHTML == "开始") {
+                btn.innerHTML = "结束";
+                var oldPos;
+                time=0;
+                lblTime.innerHTML="00:00:00";
+                speed=0.00;
+                lblSpeed.innerHTML="0.00";
+                distance=0;
+                lblDis.innerHTML="0";
+                geolocation.getCurrentPosition(function(status, result) {
+                    if (status == 'complete') {
+                        oldPos = result.position;
+                    } else {
+                        onError(result);
+                    }
+                });
+
+                timer=setInterval(() => {
+                    time++;
+                    lblTime.innerHTML = setTimeFormat(time);
+                    geolocation.getCurrentPosition(function(status, result) {
+                        if (status == 'complete') {
+                            var newPos = result.position;
+                            if (oldPos.getLng() != newPos.getLng() || oldPos.getLat() != newPos.getLat()) {
+                                var path = [oldPos, newPos];
+                                var polyline = new AMap.Polyline({
+                                    path: path,
+                                    borderWeight: 3,
+                                    strokeColor: "#3366FF",
+                                    strokeOpacity: 1,
+                                    strokeWeight: 6,
+                                    strokeStyle: "solid",
+                                    strokeDasharray: [10, 5],
+                                    lineJoin: 'round',
+                                    lineCap: 'round',
+                                });
+                                mapObj.add(polyline);
+                                var miles = AMap.GeometryUtil.distance(oldPos, newPos);
+                                var km = kmtom(miles);
+                                distance = (Number(distance) + Number(km)).toFixed(2);
+                                lblDis.innerHTML = distance;
+                                speed = calcSpeed(miles, time);
+                                lblSpeed.innerHTML = speed;
+                            } else {
+                                lblSpeed.innerHTML = "0.00";
+                            }
+                            oldPos = newPos;
+                        } else {
+                            onError(result);
+                        }
+                    });
+                }, 1000);
+            } else {
+                btn.innerHTML="开始";
+                clearInterval(timer);
+                lblSpeed.innerHTML = "0.00";
+            }
+        }
+
+        function onError(obj) {
+            alert(obj.info + '--' + obj.message);
+            console.log(obj);
+        }
+
+        function setTimeFormat(time) {
+            var h = this.setZero(Math.floor(time / 3600));
+            var i = this.setZero(Math.floor((time % 3600) / 60));
+            var s = this.setZero(time % 60);
+            return h + ':' + i + ':' + s;
+        }
+
+        function setZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+        function calcSpeed(distance, time) {
+            return ((distance / time) * 3.6).toFixed(2);
+        }
+
+        function kmtom(miles) {
+            return (miles / 1000).toFixed(2);
+        }
+
+    </script>
+</body>
+
+</html>
