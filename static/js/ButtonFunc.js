@@ -28,7 +28,7 @@ btnFriends.addEventListener('mouseup', function(e){
 	
 });
 
-btnFriends.addEventListener('mouseup', function(e){
+btnTodolist.addEventListener('mouseup', function(e){
 	mouseX = e.clientX;
 	mouseY = e.clientY;
 	
