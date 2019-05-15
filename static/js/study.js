@@ -52,10 +52,10 @@ function printWord(){
 function updateImg(i){
   var img = document.getElementsByClassName("collect_img")[0];
   if(word_collect[i] == 1){
-    img.src = "../static/img/Collected.png";
+    img.src = "../img/Collected.png";
   }
   else{
-    img.src = "../static/img/Collecting.png";
+    img.src = "../img/Collecting.png";
   }
   img.value = word_collect[i];
 }
@@ -155,6 +155,9 @@ function collectClick(){
 
 }
 
+function collectList(){
+  
+}
 
 function confirmClick(){
   var div = document.getElementById('div1');

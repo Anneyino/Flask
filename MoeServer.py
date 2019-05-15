@@ -325,6 +325,29 @@ def learn():
     print(data)
     return json.dumps(data)
 
+@app.route('/GoToCollectList', methods = ['POST'])
+def GoToCollectList():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+    
+    return render_template("collectList.html") 
+
+@app.route('/GetAllCollectWords', methods = ['POST'])
+def GetAllCollectWords():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return {'code': 'no user'}
+    data = {'code': 'ok'}
+    current_uid = user[0]
+    collect_words = databaseq.get_collect(current_uid)
+    collectlist = {}
+    for idx, word in enumerate(collect_words):
+        collectlist[idx] = word[0]
+    data['data'] = collectlist
+    return json.dumps(data)    
 
 @app.route('/recordSchedule', methods=['POST'])
 def recordSchedule():
