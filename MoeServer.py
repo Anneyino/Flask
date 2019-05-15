@@ -149,27 +149,57 @@ def searchUser():
     data = {'code': 'ok'}
     user_names = {}
     user_isfriend = {}
+    frontend_action = {}
     index = 0
     for idx, user in enumerate(users):
         user_name = user[1]
         if user[0] != current_uid:
             user_names[index] = user_name
             isfriend = databaseq.check_friend(current_uid,user[0])
-            print(isfriend)
-            print(user[0])
             if isfriend:
                 user_isfriend[index] = "已关注"
+                frontend_action[index] = "/NoFocusFriend"
             else:
                 user_isfriend[index] = "未关注"
+                frontend_action[index] = "/FocusFriend"
             index = index + 1;            
     data['data'] = user_names
     data['isfriend'] = user_isfriend
-    print(data)
+    data['action'] = frontend_action
     return json.dumps(data)
 
-# @app.route('/FocusFriend', methods = ['POST'])
-# def
+@app.route('/FocusFriend', methods = ['POST'])
+def FocusFriend():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
 
+    current_uid = user[0]
+    fname = request.form['uid']
+    friend = databaseq.get_user_by_name(fname)
+    fid = friend[0]
+    print(fid)
+    databaseq.add_friend(current_uid,fid)
+
+    resp = redirect(url_for('friendlist'))
+    return resp    
+
+
+@app.route('/NoFocusFriend', methods = ['POST'])
+def NoFocusFriend():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+
+    current_uid = user[0]
+    fname = request.form['uid']
+    friend = databaseq.get_user_by_name(fname)
+    fid = friend[0]
+    databaseq.del_friend(current_uid,fid)
+    resp = redirect(url_for('friendlist'))
+    return resp    
 
 @app.route('/GoTolearn', methods=['POST'])
 def GoTolearn():

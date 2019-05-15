@@ -43,13 +43,11 @@ $(function(){
         $('.focus_btn-two').click(function(){
           var parentForm = $(this).parent();
           if($(this).text()=="未关注"){
-              parentForm.attr('action',"/FocusFriend");
               parentForm.submit();
           }else{
               var friendname = $(this).prev().val()
               var remove_friend = confirm("是否取消对"+friendname+"的关注？");
               if(remove_friend == true){
-              parentForm.attr('action',"/NoFocusFriend");
               parentForm.submit();
               }else{
                   return;
@@ -96,13 +94,14 @@ $(function(){
                 success: function (redata) {
                     var index = 0;
                     var htmlstr="";
+
                     for(var d in redata.data){
                         htmlstr += '<div class = "sort_list-two">' +
                         '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
                         '<div class = "num_name">' + redata.data[index] + '</div>' +
                         '<input type="text" id="fname" name="fname" value ='+ redata.data[index] +' style="display:none;"/>' +
                         '</form>'+
-                        '<form class = "losefocusfriend" action = "" method = "POST">' +
+                        '<form class = "losefocusfriend" action = '+ redata.action[index] +' method = "POST">' +
                         '<input type="text" id="uid" name="uid" value =' + redata.data[index] + ' style="display:none;"/>' +
                         '<button type="submit" class="focus_btn-two">'+ redata.isfriend[index] +'</button>' +
                         '</form>' +

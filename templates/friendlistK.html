@@ -21,7 +21,7 @@
 
   <script src="../static/js/jquery.1.9.1.min.js"></script>
   <script type="text/javascript" src="../static/js/jquery.charfirst.pinyin.js"></script>
-  <script type="text/javascript" src="../static/js/circlez.js"></script>
+  <script type="text/javascript" src="../static/js/circlem.js"></script>
 
 </HEAD>
 
@@ -29,15 +29,12 @@
  <div class="header-two">
   <div>
     <i class="glyphicon glyphicon-chevron-left" onclick="back()"><a href="javascript:back()"></a> </i>
-    <form action="/searchUser" id = "searchForm" method = "POST">
-    <div class="input">
+    <form action="/searchUser" class="input" id = "searchForm" method = "POST">
       <span class="glyphicon glyphicon-search"></span> 
       <input name="search" id="search" type="text" />
-    </div>
     </form>
   </div>
 </div>
-<div id="uid" style="display:none;">{{uid}}</div>
 <div class="header">
   <div>
     <p>好友列表</p>
@@ -68,14 +65,13 @@
        dataType: "json",
        success: function (redata) {
            var index = 0;
-           alert(redata.data[0]);
            for(var d in redata.data){
             
             var htmlstr = '<form class = "gofriend" action = "/GoForFriend" method = "POST">' +
             '<div class = "num_name">' + redata.data[index] + '</div>'+
             '<input type="text" id="fname" name="fname" value ='+ redata.data[index] +' style="display:none;"/>' +
             '</form>'+
-            '<form class = "focusfriend" action = "/FocusFriend" method = "POST">' +
+            '<form class = "focusfriend" action = "/NoFocusFriend" method = "POST">' +
             '<input type="text" id="uid" name="uid" value = ' + redata.data[index] + ' style="display:none;"/>' +
             '<button type="submit" class="focus_btn">已关注</button>' +
             '</form>';
