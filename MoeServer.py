@@ -318,7 +318,9 @@ def learn():
             if iscollect:
                 iscollects[idx] = 1
             else:
-                iscollects[idx] = 0  
+                iscollects[idx] = 0
+            if idx > 11:
+                break      
     data['word'] = words
     data['chinese'] = chineses
     data['iscollect'] = iscollects 

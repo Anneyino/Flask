@@ -52,10 +52,10 @@ function printWord(){
 function updateImg(i){
   var img = document.getElementsByClassName("collect_img")[0];
   if(word_collect[i] == 1){
-    img.src = "../img/Collected.png";
+    img.src = "../static/img/Collected.png";
   }
   else{
-    img.src = "../img/Collecting.png";
+    img.src = "../static/img/Collecting.png";
   }
   img.value = word_collect[i];
 }
