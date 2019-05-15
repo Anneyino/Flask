@@ -391,6 +391,16 @@ def backToHome():
     resp = redirect(url_for('home'))    
     return resp
 
+@app.route('/backToLearn', methods =['POST'])
+def backToLearn():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+    #暂时返回home，日后修改
+    resp = redirect(url_for('home'))    
+    return resp    
+
 @app.route('/recordSchedule', methods=['POST'])
 def recordSchedule():
     # check login status
@@ -407,3 +417,12 @@ def recordSchedule():
 
     resp = redirect(url_for('home'))
     return resp
+
+@app.route('/GoToExercise', methods = ['POST'])
+def GoToExercise():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
+
+    return render_template("map.html")    
