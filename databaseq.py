@@ -138,7 +138,7 @@ def check_collect(uid,word):
     if not iscollect:
         return False
     return True
-    
+
 def get_collect(uid):
     sql_str = "SELECT word FROM collect_word WHERE uid = %s;"
     words = fetchAllres(sql_str, (uid,))

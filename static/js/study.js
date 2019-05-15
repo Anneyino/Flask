@@ -155,10 +155,6 @@ function collectClick(){
 
 }
 
-function collectList(){
-  
-}
-
 function confirmClick(){
   var div = document.getElementById('div1');
   var selectBox = document.getElementById('chapters');

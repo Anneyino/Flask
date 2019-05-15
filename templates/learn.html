@@ -132,8 +132,10 @@
 	<button class="collect" onclick="collectClick()">
   </button>
   <button class="recognizing" onclick="updatePage(0)">不认识的</button>
-	<button class="recognized" onclick="updatePage(1)">认识的</button>
-  <button class="collect_list" onclick="collectList()">收藏</button>
+  <button class="recognized" onclick="updatePage(1)">认识的</button>
+  <form action="/GoToCollectList" method = "POST">
+  <button type="submit" class="collect_list">收藏</button>
+  </form>>
 </div>
 
 </body>
