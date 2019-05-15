@@ -2,10 +2,8 @@ var btnStudy = document.getElementsByClassName('btn')[0];
 var btnSports = document.getElementsByClassName('btn')[1];
 var btnFriends = document.getElementsByClassName('btn')[2];
 var btnTodolist = document.getElementsByClassName('btn')[3];
-var div = document.getElementById('background');
-var close = document.getElementById('close-button');
-
 var list = document.getElementById('container');
+var tasksList = document.getElementById("tasksList");
 
 var mouseX = window.innerWidth / 2;
 var mouseY = window.innerHeight / 2;
@@ -32,5 +30,19 @@ btnTodolist.addEventListener('mouseup', function(e){
 	mouseX = e.clientX;
 	mouseY = e.clientY;
 	
-	list.style.display = "block";
+	displayList();
 });
+
+
+var displayList = function() {
+    list.style.display = "block";
+    var htmlStr = "";
+    //从服务器端获取的数组
+    var temp = new Array(1,2,3);
+
+    for(var i = 0;i < temp.length;i++){
+    	htmlStr += "<li>" + temp[i] + "<button class='delete'><span><i class='fa fa-trash-o'></i></span></button></li>";
+    }
+
+    tasksList.innerHTML = htmlStr;
+}
