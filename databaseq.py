@@ -128,6 +128,28 @@ def search_user(keyword):
     users = fetchAllres(sql_str, (keyword,"%"))
     return users
 
+def add_collect(uid,word):
+    sql_str = "INSERT INTO collect_word(uid,word) VALUES(%s, %s);"
+    executeSQL(sql_str, (uid, word))
+
+def check_collect(uid,word):
+    sql_str = "SELECT * FROM collect_word WHERE uid = %s and word = %s;"
+    iscollect = fetchOneres(sql_str, (uid, word))
+    if not iscollect:
+        return False
+    return True    
+def add_todo(uid,user_plan):
+    sql_str = "INSERT INTO user_todo(uid,user_plan) VALUES(%s, %s);"
+    executeSQL(sql_str, (uid, user_plan))
+
+def del_todo(uid,user_plan):
+    sql_str = "DELETE FROM user_todo WHERE uid = %s and user_plan = %s;"    
+    executeSQL(sql_str, (uid, user_plan))
+
+def get_user_todo(uid):
+    sql_str = "SELECT user_plan FROM user_todo WHERE uid = %s;"
+    todos = fetchAllres(sql_str, (uid,))
+    return todos
 
 def get_progress(uid, sid):
     sql_str = "SELECT progress FROM user_subject WHERE uid=%s AND sid=%s;"
