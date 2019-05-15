@@ -5,6 +5,8 @@ var btnTodolist = document.getElementsByClassName('btn')[3];
 var div = document.getElementById('background');
 var close = document.getElementById('close-button');
 
+var list = document.getElementById('container');
+
 var mouseX = window.innerWidth / 2;
 var mouseY = window.innerHeight / 2;
 
@@ -26,12 +28,9 @@ btnFriends.addEventListener('mouseup', function(e){
 	
 });
 
-close.onclick = function close() {
-	div.style.display = "none";
-}
- 
-window.onclick = function close(e) {
-	if (e.target == div) {
-		div.style.display = "none";
-	}
-}
+btnFriends.addEventListener('mouseup', function(e){
+	mouseX = e.clientX;
+	mouseY = e.clientY;
+	
+	list.style.display = "block";
+});
