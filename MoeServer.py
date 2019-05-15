@@ -318,8 +318,7 @@ def learn():
             if iscollect:
                 iscollects[idx] = 1
             else:
-                iscollects[idx] = 0
-
+                iscollects[idx] = 0  
     data['word'] = words
     data['chinese'] = chineses
     data['iscollect'] = iscollects 

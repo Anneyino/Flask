@@ -1,3 +1,12 @@
+var target_num = 0;
+var new_word = 0;
+var review_index = 0;
+var all_words = new Array(new Array(),new Array());
+var word_collect = new Array();
+var review_words = new Array();
+var last_word = new Array();
+var last_copy = new Array();
+
 function printImg(){
   var collect_btn = document.getElementsByClassName("collect")[0];
   var img = document.createElement("img");
@@ -164,26 +173,16 @@ function confirmClick(){
     dataType: "json",
     success: function (redata) {
         var index = 0;
-        var target_num = 0;
-        var new_word = 0;
-        var review_index = 0;
-        var all_words = new Array(new Array(),new Array());
-        var word_collect = new Array();
-        var review_words = new Array();
-        var last_word = new Array();
-        var last_copy = new Array();
-        for(var d in redata.data){
-            all_words[0][index] = redata.word[index];
-            all_words[1][index] = redata.chinese[index];
-            word_collect[index] = redata.iscollect[index];
+        for(var d in redata.word){
+            all_words[0][index] = redata.word[index+1];
+            all_words[1][index] = redata.chinese[index+1];
+            word_collect[index] = redata.iscollect[index+1];
             index = index + 1;
-     }
-         printWord();
+        }
     }
     })
-
-
   var footstrap = document.getElementsByClassName("footstrap")[0];
   div.style.display = "none";
   footstrap.style.display = "block";
+  printWord();
  }
