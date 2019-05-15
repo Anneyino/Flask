@@ -362,7 +362,7 @@ def AddToCollect():
     data_recv = request.get_data(as_text = True)
     data_recv_json = json.loads(data_recv)
     word = data_recv_json['word']
-    databaseq.add_collect(uid,word)
+    databaseq.add_collect(current_uid, word)
 
     return json.dumps(data)
 
@@ -376,7 +376,20 @@ def RemoveFromCollect():
     current_uid = user[0]
     data_recv = request.get_data(as_text = True)
     data_recv_json = json.loads(data_recv)
+    word = data_recv_json['word']
+    databaseq.del_collect(current_uid, word)
+
+    return json.dumps(data)
+
+@app.route('/backToHome', methods = ['POST'])
+def backToHome():
+    session_id = request.cookies.get('SESSION_ID', '')
+    user = databaseq.get_user_by_session_id(session_id)
+    if not user:
+        return render_template("sign.html", error='please login')
     
+    resp = redirect(url_for('home'))    
+    return resp
 
 @app.route('/recordSchedule', methods=['POST'])
 def recordSchedule():
