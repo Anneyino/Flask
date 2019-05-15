@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../static/css/Buttonstyle.css">
         <link rel="stylesheet" href="../static/css/to-do-list.css">
         <link rel="stylesheet" href="../static/css/jump.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/ball.css">
 </head>
 <body background = "../static/img/bg.jpg" style = "background-repeat: no-repeat; background-size:100% 100%; background-attachment: fixed;">
 <div style={{show_button}}>
@@ -42,11 +43,29 @@
     </div>
 </div>
 
+
+    <div class="wrapper">
+        <script src="../static/js/ball.js"></script>
+        <div id="color">
+            <div class="progress">
+                <div class="inner">
+                    <div class="percent"><span>0</span>%</div>
+                    <div class="water"></div>
+                    <div class="glare"></div>
+                </div>
+            </div>
+        </div>
+        <div id="percent-box" style="display: none;"></div>
+    </div>
+
        <script  src="../static/js/ButtonFunc.js"></script>
        <script  src="../static/js/to-do-list.js"></script>
        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript">
     /* 把 autoload.js 内容直接内置 */
+
+    changeTheBall();
+
     $('body').append('<div class="waifu"><div class="waifu-tips"></div><canvas id="live2d" class="live2d"></canvas><div class="waifu-tool"><span class="fui-home"></span> <span class="fui-chat"></span> <span class="fui-eye"></span> <span class="fui-user"></span> <span class="fui-photo"></span> <span class="fui-info-circle"></span> <span class="fui-cross"></span></div></div>');
     $.ajax({url: "../static/assets/waifu-tips.js", dataType:"script", cache: true, success: function() {
         $.ajax({url: "../static/assets/live2d.js", dataType:"script", cache: true, success: function() {
