@@ -22,6 +22,8 @@
             //Attaching event handler to add button
             $("#taskAdd").on("click", function() {
 
+
+                //上传的值  !$taskInput.val()
                 //Returning false if input is empty
                 if (!$taskInput.val()) {
                     return false;
@@ -43,6 +45,7 @@
                     //work correctly with setTimeout() function
                     var $parent = $(this).parent();
 
+                    //上传数据  $parent
                     //Displaying CSS animation
                     $parent.css("animation", "fadeOut .3s linear");
 
