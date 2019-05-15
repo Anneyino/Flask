@@ -50,10 +50,6 @@ function printWord(){
   target_num++;
 }
 
-function confirmClick(){
-  printWord();
-}
-
 function updateImg(i){
   var img = document.getElementsByClassName("collect_img")[0];
   if(word_collect[i] == 1){
@@ -159,21 +155,12 @@ function homeClick(){
 function collectClick(){
 
 }
-
-var btn = document.getElementById('open_btn');
-var div = document.getElementById('background');
-var close = document.getElementById('close-button');
  
-btn.onclick = function show() {
-  div.style.display = "block";
-}
- 
-close.onclick = function close() {
+function confirmClick() {
+  var div = document.getElementById('div1');
+  var footstrap = document.getElementsByClassName("footstrap")[0];
   div.style.display = "none";
+  footstrap.style.display = "block";
+  printWord();
 }
- 
-window.onclick = function close(e) {
-  if (e.target == div) {
-    div.style.display = "none";
-  }
-}
+
