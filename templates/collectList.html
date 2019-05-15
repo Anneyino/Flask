@@ -56,8 +56,22 @@
                                 document.getElementById('wordList').appendChild(li);
                             }
                         }
-                        var list=new Array("word","car","moe");
+                        
+
+
+                        $.ajax({
+                           async: true,
+                           url: "/GetAllCollectWords",
+		                   type: "POST",
+                           dataType: "json",
+                           success: function (redata) {
+                            index = 0;
+                            var list = new Array();
+                           for(var d in redata.data){
+                            list[index] = redata.data[index];
+                        }
                         createList(list);
+	                	}})
                     </script>
 
                 </ul>

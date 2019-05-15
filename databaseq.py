@@ -137,7 +137,13 @@ def check_collect(uid,word):
     iscollect = fetchOneres(sql_str, (uid, word))
     if not iscollect:
         return False
-    return True    
+    return True
+
+def get_collect(uid):
+    sql_str = "SELECT word FROM collect_word WHERE uid = %s;"
+    words = fetchAllres(sql_str, (uid,))
+    return words
+
 def add_todo(uid,user_plan):
     sql_str = "INSERT INTO user_todo(uid,user_plan) VALUES(%s, %s);"
     executeSQL(sql_str, (uid, user_plan))
