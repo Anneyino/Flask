@@ -1,15 +1,3 @@
-var target_num = 0;
-var new_word = 0;
-var review_index = 0;
-var all_words = new Array(new Array("Hello",2,3,4,5,6,7,8,9,10,11),new Array(11,22,33,44,55,66,77,88,99,1010,1111));
-var word_collect = new Array(new Array(0,1,0))
-var review_words = new Array();
-var last_word = new Array();
-var last_copy = new Array();
-
-
-
-
 function printImg(){
   var collect_btn = document.getElementsByClassName("collect")[0];
   var img = document.createElement("img");
@@ -24,7 +12,9 @@ function printImg(){
   collect_btn.appendChild(img);
 }
 
-function printWord(){
+function printWord(){ 
+  alert("printWord call");
+  console.log(all_words);
   var word_nums = document.getElementsByClassName("word-nums")[0];
   var studing_words = document.createElement("span");
   var studied_words = document.createElement("span");
@@ -35,7 +25,7 @@ function printWord(){
   word_nums.appendChild(studing_words);
   word_nums.appendChild(studied_words);
 
-
+   
   var total_word = document.getElementsByClassName("total-word")[0];
   var word = document.createElement("div");
   var meaning = document.createElement("p");
@@ -155,12 +145,45 @@ function homeClick(){
 function collectClick(){
 
 }
- 
-function confirmClick() {
+
+
+function confirmClick(){
   var div = document.getElementById('div1');
+  var selectBox = document.getElementById('chapters');
+  var selectedChapter = selectBox.options[selectBox.selectedIndex].text;
+  selectedChapter = selectedChapter - 1;
+   
+  var data = {"chapter" : selectedChapter};
+  senddata = JSON.stringify(data);    
+  alert("hello");
+  $.ajax({
+    async: false,
+    url: "/learn",
+    type: "POST",
+    data: senddata,
+    dataType: "json",
+    success: function (redata) {
+        var index = 0;
+        var target_num = 0;
+        var new_word = 0;
+        var review_index = 0;
+        var all_words = new Array(new Array(),new Array());
+        var word_collect = new Array();
+        var review_words = new Array();
+        var last_word = new Array();
+        var last_copy = new Array();
+        for(var d in redata.data){
+            all_words[0][index] = redata.word[index];
+            all_words[1][index] = redata.chinese[index];
+            word_collect[index] = redata.iscollect[index];
+            index = index + 1;
+     }
+         printWord();
+    }
+    })
+
+
   var footstrap = document.getElementsByClassName("footstrap")[0];
   div.style.display = "none";
   footstrap.style.display = "block";
-  printWord();
-}
-
+ }

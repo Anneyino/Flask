@@ -293,24 +293,38 @@ def learn():
 
     #sid = request.form['subjectID'] 为测试暂时用1替代
     sid = 1
-    chapter = request.form['chapter']
-    subject = databaseq.get_subject(sid)
+    current_uid = user [0]
+    data_recv = request.get_data(as_text = True)
+    data_recv_json = json.loads(data_recv)
 
+    chapter = data_recv_json['chapter']
+    subject = databaseq.get_subject(sid)
+    data = {'code': 'ok'}
     if chapter < 0 or chapter > subject[2] - 1:
         return {'code': 'illegal parameter'}
 
     stored_path = subject[3]
     filename = "table" + str(chapter) + ".csv"
     path = os.path.join(stored_path, filename)
-
     words = {}
+    chineses = {}
+    iscollects = {}
     with open(path) as csvfile:
         spamreader = csv.reader(csvfile)
         for idx, row in enumerate(spamreader, 1):
-            words[idx] = {"word": row[0]}
-            words[idx] = {"chinese": row[1]}
-    ret_data = {"code": "ok", "data": words}
-    return json.dumps(ret_data)
+            words[idx] = row[0]
+            chineses[idx] = row[1]
+            iscollect = databaseq.check_collect(current_uid, row[0])
+            if iscollect:
+                iscollects[idx] = 1
+            else:
+                iscollects[idx] = 0
+
+    data['word'] = words
+    data['chinese'] = chineses
+    data['iscollect'] = iscollects 
+    print(data)
+    return json.dumps(data)
 
 
 @app.route('/recordSchedule', methods=['POST'])
