@@ -43,6 +43,13 @@ CREATE TABLE subject(
     PRIMARY KEY(sid)
 )charset=utf8;
 
+CREATE TABLE collect_word(
+    cid INT AUTO_INCREMENT,
+    uid INT,
+    word VARCHAR(50),
+    PRIMARY KEY(cid),
+    FOREIGN KEY(uid) REFERENCES user(uid) 
+)
 CREATE TABLE user_helper(
     uid INT,
     hid INT,

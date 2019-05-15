@@ -212,7 +212,10 @@ def GoTolearn():
     uid = user[0]
     sid = request.form['subjectID']
     progress = databaseq.get_progress(uid, sid)
-    return render_template('learn.html', chapter=progress)
+    if progress != 0:
+        alert_str = "记录到上次学习至" + progress +"章节, 是否继续学习？"
+
+    return render_template('learn.html', chapter=progress, alertinfo = alert_str)
 
 
 @app.route('/Totalchapter', methods=['POST'])
@@ -222,8 +225,11 @@ def Totalchapter():
     user = databaseq.get_user_by_session_id(session_id)
     if not user:
         return {'code': 'no user'}
+    
+    data_recv = request.get_data(as_text = True)
+    data_recv_json = json.loads(data_recv)
 
-    sid = request.form['subjectID']
+    sid = data_recv_json['subjectID']
     subject = databaseq.get_subject(sid)
     chapter_no = subject[2]
     data = {'code': 'ok', "data": chapter_no}
