@@ -81,12 +81,14 @@ function updatePage(i){
   var word_back = document.getElementsByClassName("word-back")[0];
   var word = document.getElementsByClassName("word")[0];
   var meaning = document.getElementsByClassName("meaning")[0];
+  var collect_btn_two = document.getElementsByClassName("collect-two")[0];
 
   if(target_num == 10 && review_index < review_words.length){
     word_back.innerHTML = all_words[0][last_word[last_word.length - 1]];
 
     word.innerHTML = all_words[0][review_words[review_index]];
     meaning.innerHTML = all_words[1][review_words[review_index]];
+    collect_btn_two.value = word_collect[review_words[review_index]];
     updateImg(review_words[review_index]);
     last_word.push(review_words[review_index]);  
 
@@ -123,7 +125,9 @@ function backClick(){
   var footstrap_two = document.getElementsByClassName("footstrap-two")[0];
   var least = last_copy.pop();
 
-  var str= '<button class="collect-two">收藏</button>' +
+  var str= '<form class="collect_form" action="/GoToCollectList" method = "POST">'+
+  '<button type = submit class="collect-two" value="" onclick="collectClickTwo()"></button>' +
+  '</form>' +
   '<button class="continue" onclick="continueClick()">继续学习</button>';
   footstrap_two.innerHTML = str;
 
@@ -157,7 +161,37 @@ function homeClick(){
 }
 
 function collectClick(){
+  var collect_btn = document.getElementsByClassName("collect")[0];
+  var img = document.getElementsByClassName("collect_img")[0];
+  var word = document.getElementsByClassName("word")[0];
+  if(collect_btn.value == 1){
+    //取消关注 word.innerHTML
+    img.src = "../static/img/Collecting.png";
+    collect_btn.value =0;
+    word_collect[target_num] == 0;
+  } else{
+    //进行关注 word.innerHTML
+    img.src = "../static/img/Collected.png";
+    collect_btn.value =1;
+    word_collect[target_num] == 1;
+  }
+}
 
+function collectClickTwo(){
+  var collect_btn_two = document.getElementsByClassName("collect-two")[0];
+  var img = document.getElementsByClassName("collect_img")[0];
+  var word = document.getElementsByClassName("word")[0];
+  if(collect_btn_two.value == 1){
+    //取消关注 word.innerHTML
+    img.src = "../static/img/Collecting.png";
+    collect_btn_two.value =0;
+    word_collect[review_words[review_index]] == 0;
+  } else{
+    //进行关注 word.innerHTML
+    img.src = "../static/img/Collected.png";
+    collect_btn_two.value =1;
+    word_collect[review_words[review_index]] == 1;
+  }
 }
 
 function confirmClick(){
